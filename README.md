@@ -12,3 +12,5 @@
 ポップンミュージックのスコア推移を記録できるwebアプリケーション
 # マーケット
 ポップンミュージックをプレイしているユーザー
+# 画面遷移図
+https://www.figma.com/file/WnfluJACdCh4PjQxrw5slJ/result_recorder?node-id=0%3A1
