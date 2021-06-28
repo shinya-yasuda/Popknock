@@ -15,4 +15,4 @@
 # 画面遷移図
 https://www.figma.com/file/WnfluJACdCh4PjQxrw5slJ/result_recorder?node-id=0%3A1
 # ER図
-https://gyazo.com/f139119dcbac45c04eabf596ebe27d8f
+https://gyazo.com/6bf9dd88c4cb306995ec3713237578e9
