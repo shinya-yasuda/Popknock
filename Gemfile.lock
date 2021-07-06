@@ -86,6 +86,10 @@ GEM
     crass (1.0.6)
     debug_inspector (1.1.0)
     diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     erubis (2.7.0)
     factory_bot (6.2.0)
@@ -237,6 +241,13 @@ GEM
       sprockets-rails
       tilt
     sexp_processor (4.15.3)
+    slim (4.1.0)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
+    slim-rails (3.2.0)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 5.0)
     sorcery (0.16.1)
       bcrypt (~> 3.1)
       oauth (~> 0.5, >= 0.5.5)
@@ -252,6 +263,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.8.2)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -281,11 +293,13 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  bcrypt
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.2)
   byebug
   capybara
+  dotenv-rails
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
@@ -296,6 +310,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails (>= 6)
+  slim-rails
   sorcery
   spring
   spring-watcher-listen (~> 2.0.0)
