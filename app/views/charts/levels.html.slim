@@ -1,0 +1,9 @@
+.container
+  h1 難易度表
+  .row
+    - 5.downto(1) do |x|
+      .col
+        .ul 
+          - (x * 10).downto(x * 10 - 9) do |num|
+            .li
+              = link_to("LV#{num}", charts_path(level: num))

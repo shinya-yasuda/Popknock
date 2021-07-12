@@ -1,0 +1,15 @@
+.collapse#navbarToggleExternalContent
+  .bg-dark.p-4
+    ul.nav.flex-column
+      li.nav-item
+        = link_to('HOME', root_path, { class: 'nav-link' })
+      li.nav-item
+        = link_to('新規登録', new_user_path,{ class: 'nav-link' })
+      li.nav-item
+        a.nav-link href='#'
+          | ログイン
+nav.navbar.navbar-dark.bg-dark
+  .container-fluid
+    button.navbar-toggler type='button' data-bs-toggle='collapse' data-bs-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation'
+      span.navbar-toggler-icon
+    = link_to("pop'n result_recorder", root_path, { class: 'navbar-brand' })

@@ -1,0 +1,15 @@
+.container
+  h1 ="難易度表/LV#{@level}"
+  - if @charts.present?
+    table.table
+      thead
+        tr
+          th scope='col' 曲名
+          th scope='col' 難易度
+      tbody
+        - @charts.each do |c|
+          tr
+            th scope='col' #{c.music.name}
+            th scope='col' #{c.difficulty}
+  - else
+    曲がありません
