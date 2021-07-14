@@ -5,11 +5,12 @@ html
       | ResultRecorder
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
   body
     - if logged_in?
       = render 'shared/header'
     - else
       = render 'shared/before_login_header'
+    = render 'shared/flash_messages'
     = yield
