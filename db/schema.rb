@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_063730) do
+ActiveRecord::Schema.define(version: 2021_07_14_073411) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2021_07_14_063730) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "music_id", null: false
+    t.integer "ran_level"
+    t.integer "s_ran_level"
     t.index ["music_id"], name: "index_charts_on_music_id"
   end
 
