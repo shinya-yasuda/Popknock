@@ -1,20 +1,5 @@
 .container
   h1 楽曲追加
   = form_with model: [:admin, @music], local: true do |f|
-    .form-group
-      = f.label :name
-      = f.text_field :name, class: 'form-control'
-    .form-group
-      = f.label :level_easy
-      = f.number_field :level_easy, name: 'level[]', class: 'form-control'
-    .form-group
-      = f.label :level_N
-      = f.number_field :level_N, name: 'level[]', class: 'form-control'
-    .form-group
-      = f.label :level_H
-      = f.number_field :level_H, name: 'level[]', class: 'form-control'
-    .form-group
-      = f.label :level_EX
-      = f.number_field :level_EX, name: 'level[]', class: 'form-control'
-    .form-group
-      = f.submit '追加', class: 'btn btn-primary'
+    = render 'admin/musics/form', f: f
+    = f.submit '追加', class: 'btn btn-primary'
