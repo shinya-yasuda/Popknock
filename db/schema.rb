@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_073411) do
+ActiveRecord::Schema.define(version: 2021_07_16_071531) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -46,6 +46,23 @@ ActiveRecord::Schema.define(version: 2021_07_14_073411) do
     t.string "genre"
   end
 
+  create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "chart_id"
+    t.integer "option", null: false
+    t.integer "medal"
+    t.integer "score", null: false
+    t.integer "cool"
+    t.integer "great"
+    t.integer "good"
+    t.integer "bad"
+    t.datetime "played_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chart_id"], name: "index_results_on_chart_id"
+    t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "email", null: false
@@ -58,4 +75,6 @@ ActiveRecord::Schema.define(version: 2021_07_14_073411) do
   end
 
   add_foreign_key "charts", "musics"
+  add_foreign_key "results", "charts"
+  add_foreign_key "results", "users"
 end
