@@ -5,12 +5,22 @@ Rails.application.routes.draw do
   resources :charts
   get 'levels', to: 'charts#levels'
   resources :users
+  namespace :ran do
+    resources :charts
+    get 'levels', to: 'charts#levels'
+  end
+  namespace :s_ran do
+    resources :charts
+    get 'levels', to: 'charts#levels'
+  end
   namespace :admin do
     get 'login', to: 'user_sessions#new', as: :login
     post 'login', to: 'user_sessions#create'
     post 'logout', to: 'user_sessions#destroy', as: :logout
     resources :informations
-    resources :musics
+    resources :musics do
+      collection { post :csv_import }
+    end
     resources :charts
   end
   get 'login', to: 'user_sessions#new', as: :login

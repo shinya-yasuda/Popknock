@@ -3,3 +3,7 @@
   = form_with model: [:admin, @music], local: true do |f|
     = render 'admin/musics/form', f: f
     = f.submit '追加', class: 'btn btn-primary'
+  h3 CSVファイルから追加
+  = form_with url: csv_import_admin_musics_path do |form|
+    = form.file_field :file, accept: '.csv'
+    = form.submit 'アップロード'

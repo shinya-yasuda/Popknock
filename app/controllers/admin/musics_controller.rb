@@ -43,6 +43,11 @@ class Admin::MusicsController < Admin::BaseController
     redirect_to admin_musics_path
   end
 
+  def csv_import
+    Music.import(params[:file])
+    redirect_to admin_musics_path
+  end
+
   private
 
   def music_params
