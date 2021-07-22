@@ -1,8 +1,5 @@
 class ChartDecorator < Draper::Decorator
   delegate_all
-  def chart_level
-    chart.level ||= '--'
-  end
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #

@@ -13,8 +13,7 @@ class Admin::MusicsController < Admin::BaseController
     @music = Music.new(name: music_params[:name], genre: genre)
     if @music.save
       params[:level].each_with_index do |lv, i|
-        chart = Chart.new(music_id: @music.id, difficulty: i, level: lv)
-        chart.save!
+        Chart.create(music_id: @music.id, difficulty: i, level: lv)
       end
       redirect_to admin_musics_path, success: '楽曲を追加しました'
     else
@@ -28,9 +27,6 @@ class Admin::MusicsController < Admin::BaseController
   def update
     genre = music_params[:genre].present? ? music_params[:genre] : music_params[:name]
     if @music.update(name: music_params[:name], genre: genre)
-      @music.charts.each_with_index do |chart, i|
-        chart.update(level: params[:level][i])
-      end
       redirect_to admin_musics_path, success: '楽曲を更新しました'
     else
       flash.now[:danger] = '楽曲更新に失敗しました'
@@ -40,12 +36,12 @@ class Admin::MusicsController < Admin::BaseController
 
   def destroy
     @music.destroy!
-    redirect_to admin_musics_path
+    redirect_to admin_musics_path, success: '楽曲を削除しました'
   end
 
   def csv_import
     Music.import(params[:file])
-    redirect_to admin_musics_path
+    redirect_to admin_musics_path, success: 'CSVファイルの読み込みが完了しました'
   end
 
   private
