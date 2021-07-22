@@ -1,3 +1,5 @@
 class StaticPagesController < ApplicationController
-  def home; end
+  def home
+    @information_list = Information.all
+  end
 end

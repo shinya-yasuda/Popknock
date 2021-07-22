@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_07_16_071531) do
   end
 
   create_table "charts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "level"
+    t.integer "level", null: false
     t.integer "difficulty", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_07_16_071531) do
     t.index ["music_id"], name: "index_charts_on_music_id"
   end
 
-  create_table "informations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "information", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false

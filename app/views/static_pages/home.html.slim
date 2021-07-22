@@ -5,5 +5,8 @@ main.col-md-9.ms-sm-auto.col-lg-10.px-md-4
   h2
     | 更新情報
   .d-flex.flex-column.p-2.bd-highlight
-    .p-2.bd-highlight 楽曲追加
-    .p-2.bd-highlight 楽曲追加
+    - @information_list.each do |i|
+      .card
+        .card-body
+          h3.card-title #{i.title}
+          p.card-text = safe_join(i.body.split("\n"), tag(:br))
