@@ -1,8 +1,8 @@
 tr
   td #{music.genre}
   td #{music.name}
-  - music.charts.each do |chart|
-    td
-      = link_to( chart.decorate.chart_level, edit_admin_chart_path(chart))
+  - music.decorate.remake_charts.each do |chart|
+    td= chart&.level
   td= link_to '編集', edit_admin_music_path(music), class: 'btn btn-success'
   td= link_to '削除', admin_music_path(music), class: 'btn btn-danger', method: :delete, data: { confirm: "楽曲 #{music.name}を削除しますか？" }
+  

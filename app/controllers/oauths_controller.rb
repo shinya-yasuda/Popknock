@@ -9,10 +9,10 @@ class OauthsController < ApplicationController
     if (@user = login_from(provider))
       redirect_to root_path, notice: "#{provider.titleize}でログインしました"
     else
-        @user = create_from(provider)
-        reset_session
-        auto_login(@user)
-        redirect_to root_path, notice: "#{provider.titleize}でログインしました"
+      @user = create_from(provider)
+      reset_session
+      auto_login(@user)
+      redirect_to root_path, notice: "#{provider.titleize}でログインしました"
     end
   end
 
