@@ -1,0 +1,14 @@
+.container
+  h1 #{@chart.music.name}(#{@chart.difficulty})の編集
+  = form_with model: [:admin, @chart], local: true do |f|
+    = render 'shared/error_messages', object: f.object
+    .form-group
+      = f.label :level
+      = f.number_field :level, class: 'form-control', min: 1, max: 50
+    .form-group
+      = f.label :ran_level
+      = f.number_field :ran_level, class: 'form-control', min: 0, max: 12
+    .form-group
+      = f.label :s_ran_level
+      = f.number_field :s_ran_level, class: 'form-control', min: 0, max: 19
+    = f.submit '適用', class: 'btn btn-primary'

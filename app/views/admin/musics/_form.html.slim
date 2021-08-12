@@ -1,0 +1,22 @@
+= render 'shared/error_messages', object: f.object
+.form-group
+  = f.label :genre
+  = f.text_field :genre, class: 'form-control'
+.form-group
+  = f.label :name
+  = f.text_field :name, class: 'form-control'
+.form-group
+  = f.label :level_easy
+  = f.number_field :level, name: 'level[]', class: 'form-control', min: 1, max: 50
+.form-group
+  = f.label :level_N
+  = f.number_field :level, name: 'level[]', class: 'form-control', min: 1, max: 50
+.form-group
+  = f.label :level_H
+  = f.number_field :level, name: 'level[]', class: 'form-control', min: 1, max: 50
+.form-group
+  = f.label :level_EX
+  = f.number_field :level, name: 'level[]', class: 'form-control', min: 1, max: 50
+.form-group
+  = f.label :banner
+  = f.file_field :banner, class: 'form-control'

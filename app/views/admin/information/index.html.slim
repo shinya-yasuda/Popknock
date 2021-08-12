@@ -1,0 +1,9 @@
+.container
+  h1 お知らせ一覧
+  - @information_list.each do |i|
+    .card
+      .card-body
+        h3.card-title #{i.title}
+        p.card-text = safe_join(i.body.split("\n"), tag(:br))
+        = link_to '編集', edit_admin_information_path(i), class: 'btn btn-success'
+        = link_to '削除', admin_information_path(i), class: 'btn btn-danger', method: :delete, data: { confirm: 'お知らせを削除しますか？' }

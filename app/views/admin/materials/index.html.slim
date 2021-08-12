@@ -1,0 +1,7 @@
+.container
+  h1 文字画像一覧
+  - @materials.each do |material|
+    = "#{material.style}_#{material.version}_#{material.number}"
+    = link_to '編集', edit_admin_material_path(material)
+    = link_to '削除', admin_material_path(material), method: :delete
+    br

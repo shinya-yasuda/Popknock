@@ -1,0 +1,11 @@
+.container
+  h1 お知らせ追加
+  = form_with model: [:admin, @information], local: true do |f|
+    .form-group
+      = f.label :title
+      = f.text_field :title, class: 'form-control', value: ''
+    .form-group
+      = f.label :body
+      = f.text_area :body, class: 'form-control', value: ''
+    .form-group
+      = f.submit '送信', class: 'btn btn-primary'

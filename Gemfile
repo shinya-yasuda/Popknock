@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'rubocop'
 gem 'rails_best_practices'
 gem 'sorcery'
+gem 'bcrypt'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -51,3 +52,16 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'activerecord-import'
+gem 'amatch'
+gem 'carrierwave', '~> 2.0'
+gem 'dotenv-rails'
+gem 'draper'
+gem 'mini_magick'
+gem 'numo-narray'
+gem 'numo-openblas'
+gem 'roo'
+gem 'ruby-opencv'
+gem 'rumale'
+gem 'slim-rails'

@@ -1,0 +1,11 @@
+.container
+  h1 ログイン/管理者
+  = form_with url: admin_login_path, method: 'post', local: true do |f|
+    .form-group
+      = f.label :email
+      = f.text_field :email, class: 'form-control', value: ''
+    .form-group
+      = f.label :password
+      = f.password_field :password, class: 'form-control', value: ''
+    .form-group
+      = f.submit 'ログイン', class: 'btn btn-primary'
