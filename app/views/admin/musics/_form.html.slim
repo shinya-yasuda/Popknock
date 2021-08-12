@@ -17,3 +17,6 @@
 .form-group
   = f.label :level_EX
   = f.number_field :level, name: 'level[]', class: 'form-control', min: 1, max: 50
+.form-group
+  = f.label :banner
+  = f.file_field :banner, class: 'form-control'

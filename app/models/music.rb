@@ -1,8 +1,9 @@
 class Music < ApplicationRecord
   has_many :charts, dependent: :destroy
   validates :name, presence: true, length: { maximum: 255 }
+  serialize :pixels, Array
 
-  def self.import(file)
+  def import(file)
     CSV.foreach(file.path, headers: true) do |row|
       music = Music.new(genre: row[0], name: row[1])
       if music.save

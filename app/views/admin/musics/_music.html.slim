@@ -3,6 +3,6 @@ tr
   td #{music.name}
   - music.decorate.remake_charts.each do |chart|
     td= chart&.level
-  td= link_to '編集', edit_admin_music_path(music), class: 'btn btn-success'
-  td= link_to '削除', admin_music_path(music), class: 'btn btn-danger', method: :delete, data: { confirm: "楽曲 #{music.name}を削除しますか？" }
+  td= link_to '編集', edit_admin_music_path(music), class: 'btn btn-success text-nowrap'
+  td= link_to '削除', admin_music_path(music), class: 'btn btn-danger text-nowrap', method: :delete, data: { confirm: "楽曲 #{music.name}を削除しますか？" }
   
