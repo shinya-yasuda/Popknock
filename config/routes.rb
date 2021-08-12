@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'levels', to: 'charts#levels'
   get 'ran_levels', to: 'charts#ran_levels'
   get 's_ran_levels', to: 'charts#s_ran_levels'
+  resources :results
   resources :users
   namespace :admin do
     get 'login', to: 'user_sessions#new', as: :login
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
       collection { post :csv_import }
     end
     resources :charts
+    resources :materials
   end
   get 'login', to: 'user_sessions#new', as: :login
   post 'login', to: 'user_sessions#create'

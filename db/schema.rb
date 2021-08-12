@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_16_071531) do
+ActiveRecord::Schema.define(version: 2021_08_12_025832) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -39,26 +39,33 @@ ActiveRecord::Schema.define(version: 2021_07_16_071531) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "materials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "number", null: false
+    t.integer "style", null: false
+    t.integer "version", null: false
+    t.text "pixels"
+  end
+
   create_table "musics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "genre"
+    t.text "pixels"
   end
 
   create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "chart_id"
-    t.integer "option", null: false
+    t.integer "random_option", null: false
     t.integer "medal"
     t.integer "score", null: false
-    t.integer "cool"
-    t.integer "great"
     t.integer "good"
     t.integer "bad"
-    t.datetime "played_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gauge_amount"
+    t.integer "gauge_option"
     t.index ["chart_id"], name: "index_results_on_chart_id"
     t.index ["user_id"], name: "index_results_on_user_id"
   end

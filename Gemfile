@@ -54,7 +54,14 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'activerecord-import'
+gem 'amatch'
+gem 'carrierwave', '~> 2.0'
 gem 'dotenv-rails'
 gem 'draper'
+gem 'mini_magick'
+gem 'numo-narray'
+gem 'numo-openblas'
 gem 'roo'
+gem 'ruby-opencv'
+gem 'rumale'
 gem 'slim-rails'

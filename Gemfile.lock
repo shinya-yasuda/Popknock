@@ -64,6 +64,9 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    amatch (0.4.0)
+      mize
+      tins (~> 1.0)
     ast (2.4.2)
     bcrypt (3.1.16)
     better_errors (2.9.1)
@@ -85,6 +88,14 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    carrierwave (2.2.2)
+      activemodel (>= 5.0.0)
+      activesupport (>= 5.0.0)
+      addressable (~> 2.6)
+      image_processing (~> 1.1)
+      marcel (~> 1.0.0)
+      mini_mime (>= 0.1.3)
+      ssrf_filter (~> 1.0)
     code_analyzer (0.5.2)
       sexp_processor
     coderay (1.1.3)
@@ -128,10 +139,15 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.1)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     json (2.5.1)
     jwt (2.2.3)
+    lbfgsb (0.4.1)
+      numo-narray (>= 0.9.1)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -142,8 +158,11 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
     method_source (1.0.0)
+    mini_magick (4.11.0)
     mini_mime (1.1.0)
     minitest (5.14.4)
+    mize (0.4.0)
+      protocol (~> 2.0)
     msgpack (1.4.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -152,6 +171,11 @@ GEM
     nio4r (2.5.7)
     nokogiri (1.11.7-x86_64-darwin)
       racc (~> 1.4)
+    numo-linalg (0.1.7)
+      numo-narray (>= 0.9.1.4)
+    numo-narray (0.9.2.0)
+    numo-openblas (0.4.3)
+      numo-linalg (>= 0.1.4)
     oauth (0.5.6)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -162,6 +186,8 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.1)
       ast (~> 2.4.1)
+    protocol (2.0.0)
+      ruby_parser (~> 3.0)
     public_suffix (4.0.6)
     puma (4.3.8)
       nio4r (~> 2.0)
@@ -246,9 +272,17 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.7.0)
       parser (>= 3.0.1.1)
+    ruby-opencv (0.0.18)
     ruby-progressbar (1.11.0)
+    ruby-vips (2.1.2)
+      ffi (~> 1.12)
     ruby2_keywords (0.0.4)
+    ruby_parser (3.17.0)
+      sexp_processor (~> 4.15, >= 4.15.1)
     rubyzip (2.3.2)
+    rumale (0.23.1)
+      lbfgsb (>= 0.3.0)
+      numo-narray (>= 0.9.1)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -282,10 +316,14 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    ssrf_filter (1.0.7)
+    sync (0.5.0)
     temple (0.8.2)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    tins (1.29.1)
+      sync
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -313,24 +351,31 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
+  amatch
   bcrypt
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.2)
   byebug
   capybara
+  carrierwave (~> 2.0)
   dotenv-rails
   draper
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  mini_magick
   mysql2 (>= 0.4.4)
+  numo-narray
+  numo-openblas
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.7)
   rails_best_practices
   roo
   rspec-rails
   rubocop
+  ruby-opencv
+  rumale
   sass-rails (>= 6)
   slim-rails
   sorcery
