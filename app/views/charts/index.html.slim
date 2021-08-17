@@ -13,12 +13,11 @@
       tbody
         - @charts.each do |c|
           tr
-            td 
-              = link_to("#{c.music.genre}" , chart_path(c))
+            td= link_to("#{c.music.genre}" , chart_path(c))
             td #{c.music.name}
             td #{c.difficulty}
-            td
-            td
-            td
+            td= @results.best_medal(c)
+            td= @results.hi_score(c)
+            td= @results.least_bad(c)
   - else
     曲がありません

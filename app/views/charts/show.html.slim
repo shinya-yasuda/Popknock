@@ -11,9 +11,22 @@
     tbody
       tr
         th クリアメダル
+        - Result.random_options.each do |option|
+          td= @results.medal_by_option(option)
       tr
         th ハイスコア
+        - Result.random_options.each do |option|
+          td= @results.hi_score_by_option(option)
       tr
         th 最少BAD
+        - Result.random_options.each do |option|
+          td= @results.least_bad_by_option(option)
       tr
         th 平均スコア(直近10回)
+        - Result.random_options.each do |option|
+          td= @results.average_score(option, 10)
+
+  h3 スコア
+  = line_chart [ { name: 'スコア', data: @score_graph.map { |record| [I18n.l(record[0]), record[1]] } } ], max: 100_000
+  h3 BAD数
+  = line_chart [ { name: 'BAD数', data: @bad_graph.map { |record| [I18n.l(record[0]), record[1]] } } ], min: 0
