@@ -16,7 +16,7 @@
             td= link_to("#{c.music.genre}" , chart_path(c))
             td #{c.music.name}
             td #{c.difficulty}
-            td= @results.best_medal(c)
+            td= t @results.best_medal(c)
             td= @results.hi_score(c)
             td= @results.least_bad(c)
   - else

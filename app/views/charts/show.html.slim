@@ -12,7 +12,7 @@
       tr
         th クリアメダル
         - Result.random_options.each do |option|
-          td= @results.medal_by_option(option)
+          td= t @results.medal_by_option(option)
       tr
         th ハイスコア
         - Result.random_options.each do |option|
@@ -24,7 +24,7 @@
       tr
         th 平均スコア(直近10回)
         - Result.random_options.each do |option|
-          td= @results.average_score(option, 10)
+          td= @results.average_score(option, 10)&.floor
 
   h3 スコア
   = line_chart [ { name: 'スコア', data: @score_graph.map { |record| [I18n.l(record[0]), record[1]] } } ], max: 100_000

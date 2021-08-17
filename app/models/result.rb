@@ -12,7 +12,8 @@ class Result < ApplicationRecord
 
   class << self
     def best_medal(chart)
-      where(chart_id: chart.id).maximum(:medal)
+      medal = where(chart_id: chart.id).maximum(:medal)
+      "#{medal}_html" if medal
     end
 
     def hi_score(chart)
@@ -24,7 +25,8 @@ class Result < ApplicationRecord
     end
 
     def medal_by_option(option)
-      where(random_option: option).maximum(:medal)
+      medal = where(random_option: option).maximum(:medal)
+      "#{medal}_html" if medal
     end
 
     def hi_score_by_option(option)
