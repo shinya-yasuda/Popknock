@@ -10,7 +10,6 @@ class ResultsController < ApplicationController
     @result = current_user.results.new(chart_id: chart.id, gauge_option: 0, gauge_amount: gauge_amount,
                                        random_option: random_option, score: score, good: good, bad: bad)
     @result.medal = medal(@result.gauge_amount, @result.good, @result.bad, @result.gauge_option)
-    byebug
     if @result.save
       redirect_to new_result_path, success: 'リザルトを投稿しました'
     else
