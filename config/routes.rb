@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     resources :information
     resources :musics do
       collection { post :csv_import }
+      resources :charts
     end
-    resources :charts
     resources :materials
   end
   get 'login', to: 'user_sessions#new', as: :login

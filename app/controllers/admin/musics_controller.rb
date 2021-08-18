@@ -3,7 +3,7 @@ class Admin::MusicsController < Admin::BaseController
   include ImageProcess
   before_action :set_music, only: %i[edit update destroy]
   def index
-    @musics = Music.includes(:charts)
+    @musics = Music.includes(:charts).order(genre: :asc)
   end
 
   def new
@@ -23,7 +23,9 @@ class Admin::MusicsController < Admin::BaseController
     end
   end
 
-  def edit; end
+  def edit
+    @charts = @music.charts
+  end
 
   def update
     if @music.update(name: music_params[:name], genre: music_genre, pixels: pixels_array(load_image(music_params[:banner]), 21, 5))
@@ -60,19 +62,5 @@ class Admin::MusicsController < Admin::BaseController
 
   def music_genre
     music_params[:genre].present? ? music_params[:genre] : music_params[:name]
-  end
-
-  def color_hist
-    image = MiniMagick::Image.read(music_params[:banner])
-    image.resize '121x29'
-    pixels = image.get_pixels.map { |n| n.map { |m| m.map { |o| o / 64 } } }
-    color_hist = Array.new(64){0}
-    for x in 0..28 do
-      for y in 0..120 do
-        color = pixels[x][y][0] * 16 + pixels[x][y][1] * 4 + pixels[x][y][2]
-        color_hist[color] += 1
-      end
-    end
-    color_hist
   end
 end
