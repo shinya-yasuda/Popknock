@@ -1,4 +1,5 @@
 class ChartsController < ApplicationController
+  before_action :search_result, only: %i[index show]
   def levels; end
 
   def ran_levels; end
@@ -6,8 +7,16 @@ class ChartsController < ApplicationController
   def s_ran_levels; end
 
   def index
-    @level = params[:level]
-    @charts = Chart.where(level: @level)
+    if params[:level]
+      @level = params[:level]
+      @charts = Chart.where(level: @level)
+    elsif params[:ran_level]
+      @level = params[:ran_level]
+      @charts = Chart.where(ran_level: @level)
+    elsif params[:s_ran_level]
+      @level = params[:s_ran_level]
+      @charts = Chart.where(s_ran_level: @level)
+    end
     @results = current_user.results
   end
 
