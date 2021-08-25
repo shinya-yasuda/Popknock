@@ -1,23 +1,3 @@
 .container
   h1 ="難易度表/LV#{@level}"
-  - if @charts.present?
-    table.table
-      thead
-        tr
-          th scope='col' ジャンル名
-          th scope='col' 曲名
-          th scope='col' 難易度
-          th scope='col' メダル
-          th scope='col' ハイスコア
-          th scope='col' 最少BAD
-      tbody
-        - @charts.each do |c|
-          tr
-            td= link_to("#{c.music.genre}" , chart_path(c))
-            td #{c.music.name}
-            td #{c.difficulty}
-            td= t @results.best_medal(c)
-            td= @results.hi_score(c)
-            td= @results.least_bad(c)
-  - else
-    曲がありません
+  = render 'charts/charts'

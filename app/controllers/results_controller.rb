@@ -19,31 +19,6 @@ class ResultsController < ApplicationController
 
   private
 
-  def result_params
-    params.require(:result).permit(:result)
-  end
-
-  def diff_abs(array1, array2)
-    (array1 - array2).abs
-  end
-
-  def distance(array1, array2)
-    diff_abs(array1, array2).sum
-  end
-
-  def data_params(target, array, index)
-    { id: index, distance: distance(target, array) }
-  end
-
-  def array_distances(target, list)
-    ary = []
-    list.each do |item, index|
-      temp_data_params = data_params(Numo::Int16.cast(target), Numo::Int16.cast(item), index)
-      ary << temp_data_params
-    end
-    ary
-  end
-
   def music_id
     image = load_image(result_params[:result])
     image.crop('242x58+272+66')
@@ -115,42 +90,18 @@ class ResultsController < ApplicationController
       cropped_image = load_image(result_params[:result]).crop("5x5+#{263 + i * 13}+158")
       target = pixels_array(cropped_image, 5,5)
       data_array = array_distances(target, materials)
-      if data_array.min_by { |x| x[:distance] }[:id] == 1
-        return i
-      end
+      return i if data_array.min_by { |x| x[:distance] }[:id] == 1
     end
     0
   end
 
   def medal(gauge, good, bad, option)
     if bad == 0
-      if good == 0
-        'perfect'
-      elsif good <= 5
-        'fc_star'
-      elsif good <= 20
-        'fc_square'
-      else
-        'fc_circle'
-      end
+      ('perfect' if good == 0) || ('fc_star' if good <= 5) || ('fc_square' if good <= 20) || 'fc_circle'
     elsif gauge >= 17
-      if option == 'easy'
-        'clear_easy'
-      elsif bad <= 5
-        'clear_star'
-      elsif bad <= 20
-        'clear_square'
-      else
-        'clear_circle'
-      end
+      ('clear_easy' if option == 'easy') || ('clear_star' if bad <= 5) || ('clear_square' if bad <= 20) || 'clear_circle'
     elsif option != 'easy'
-      if gauge >= 15
-        'fail_star'
-      elsif gauge >= 12
-        'fail_square'
-      else
-        'fail_circle'
-      end
+      ('fail_star' if gauge >= 15)|| ('fail_square' if gauge >= 12) || 'fail_circle'
     else
     'fail_circle'
     end

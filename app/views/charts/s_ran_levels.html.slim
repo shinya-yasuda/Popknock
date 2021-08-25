@@ -4,4 +4,4 @@
     .col
       .ul
         - 19.downto(1) do |num|
-          .li = link_to("S乱#{num}", charts_path(s_ran_level: num))
+          .li = link_to("S乱#{num}", s_ran_index_charts_path(level: num))

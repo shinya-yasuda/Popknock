@@ -4,8 +4,8 @@
     .col
       .ul
         - 1.upto(6) do |num|
-          .li = link_to("乱○#{num}", charts_path(ran_level: num))
+          .li = link_to("乱○#{num}", ran_index_charts_path(level: num))
     .col
       .ul
         - 1.upto(12) do |num|
-          .li = link_to("乱●#{num}", charts_path(ran_level: num + 6))
+          .li = link_to("乱●#{num}", ran_index_charts_path(level: num + 6))
