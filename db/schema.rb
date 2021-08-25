@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2021_08_12_025832) do
 
-  create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "authentications", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider", null: false
     t.string "uid", null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_08_12_025832) do
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 
-  create_table "charts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "charts", force: :cascade do |t|
     t.integer "level", null: false
     t.integer "difficulty", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -32,29 +35,29 @@ ActiveRecord::Schema.define(version: 2021_08_12_025832) do
     t.index ["music_id"], name: "index_charts_on_music_id"
   end
 
-  create_table "information", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "information", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "materials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "materials", force: :cascade do |t|
     t.integer "number", null: false
     t.integer "style", null: false
     t.integer "version", null: false
-    t.text "pixels"
+    t.integer "pixels", array: true
   end
 
-  create_table "musics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "musics", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "genre"
-    t.text "pixels"
+    t.integer "pixels", array: true
   end
 
-  create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "results", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "chart_id"
     t.integer "random_option", null: false
@@ -70,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_08_12_025832) do
     t.index ["user_id"], name: "index_results_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email", null: false
     t.string "crypted_password"

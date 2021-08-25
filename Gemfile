@@ -6,7 +6,7 @@ ruby '3.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.7'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4'
+gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -59,6 +59,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'chartkick'
 gem 'dotenv-rails'
 gem 'draper'
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 gem 'mini_magick'
 gem 'numo-narray'
 gem 'numo-openblas'
