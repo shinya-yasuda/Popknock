@@ -2,8 +2,14 @@ require 'image_process'
 class Admin::MusicsController < Admin::BaseController
   include ImageProcess
   before_action :set_music, only: %i[edit update destroy]
+  before_action :set_q, only: :index
+  before_action :set_r, only: :remain
   def index
-    @musics = Music.includes(:charts).order(genre: :asc)
+    @musics = @q.result(distinct: true).includes(:charts).order(genre: :asc).page(params[:page])
+  end
+
+  def remain
+    @musics = @r.result(distinct: true).includes(:charts).order(genre: :asc).page(params[:page])
   end
 
   def new
@@ -11,7 +17,7 @@ class Admin::MusicsController < Admin::BaseController
   end
 
   def create
-    @music = Music.new(name: music_params[:name], genre: music_genre, pixels: pixels_array(load_image(music_params[:banner]), 21, 5))
+    @music = Music.new(name: music_params[:name], genre: music_genre, pixels: banner_pixels)
     if @music.save
       params[:level].each_with_index do |lv, i|
         Chart.create(music_id: @music.id, difficulty: i, level: lv)
@@ -24,12 +30,12 @@ class Admin::MusicsController < Admin::BaseController
   end
 
   def edit
-    @charts = @music.charts
+    @charts = @music.charts.order(difficulty: :asc)
   end
 
   def update
-    if @music.update(name: music_params[:name], genre: music_genre, pixels: pixels_array(load_image(music_params[:banner]), 21, 5))
-      redirect_to admin_musics_path, success: '楽曲を更新しました'
+    if @music.update(name: music_params[:name], genre: music_genre, pixels: banner_pixels)
+      redirect_to remain_admin_musics_path, success: '楽曲を更新しました'
     else
       flash.now[:danger] = '楽曲更新に失敗しました'
       render :edit
@@ -62,5 +68,17 @@ class Admin::MusicsController < Admin::BaseController
 
   def music_genre
     music_params[:genre].present? ? music_params[:genre] : music_params[:name]
+  end
+
+  def banner_pixels
+    pixels_array(load_image(music_params[:banner]), 21, 5) if music_params[:banner]
+  end
+
+  def set_q
+    @q = Music.all.ransack(params[:q])
+  end
+
+  def set_r
+    @r = Music.where(pixels: nil).ransack(params[:q])
   end
 end

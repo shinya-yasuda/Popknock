@@ -1,0 +1,23 @@
+.container
+  h1 バナー未追加楽曲一覧
+  = search_form_for @r, url: remain_admin_musics_path do |f|
+    = f.search_field :genre_cont
+    = f.submit '検索'
+  - if @musics.present?
+    table.table
+      thead
+        tr
+          th scope='col' ジャンル名
+          th scope='col' 曲名
+          th scope='col' e
+          th scope='col' N
+          th scope='col' H
+          th scope='col' EX
+          th scope='col' バナー
+          th scope='col'
+          th scope='col'
+      tbody
+        = render @musics
+  - else
+    曲がありません
+  = paginate @musics
