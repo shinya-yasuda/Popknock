@@ -9,7 +9,7 @@ class Admin::ChartsController < Admin::BaseController
     @music = Music.find(params[:music_id])
     @chart = @music.charts.new(chart_params)
     if @chart.save
-      redirect_to admin_music_edit_path(@music), success: '譜面を追加しました'
+      redirect_to edit_admin_music_path(@music), success: '譜面を追加しました'
     else
       flash.now[:danger] = '譜面を追加出来ませんでした'
       render :new

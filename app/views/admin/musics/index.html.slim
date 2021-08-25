@@ -1,5 +1,8 @@
 .container
   h1 楽曲一覧
+  = search_form_for @q, url: admin_musics_path do |f|
+    = f.search_field :genre_cont
+    = f.submit '検索'
   - if @musics.present?
     table.table
       thead
@@ -10,9 +13,11 @@
           th scope='col' N
           th scope='col' H
           th scope='col' EX
+          th scope='col' バナー
           th scope='col'
           th scope='col'
       tbody
         = render @musics
   - else
     曲がありません
+  = paginate @musics
