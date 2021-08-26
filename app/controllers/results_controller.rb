@@ -23,7 +23,7 @@ class ResultsController < ApplicationController
     image = load_image(result_params[:result])
     image.crop('242x58+272+66')
     target = pixels_array(image, 21, 5)
-    data_array = array_distances(target, Music.pluck(:pixels, :id))
+    data_array = array_distances(target, Music.where.not(pixels: nil).pluck(:pixels, :id))
     data_array.min_by { |x| x[:distance] }[:id]
   end
 
