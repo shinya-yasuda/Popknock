@@ -1,15 +1,15 @@
 ja:
-  fail_circle_html: '●'
-  fail_square_html: '◆'
-  fail_star_html: '★'
-  clear_easy_html: <div style="color:#008000">●</div>
-  clear_circle_html: <div style="color:#C47022">●</div>
-  clear_square: <div style="color:#C47022">◆</div>
-  clear_star_html: <div style="color:#C47022">★</div>
-  fc_circle_html: <div style="color:#AEB3B5">●</div>
-  fc_square_html: <div style="color:#AEB3B5">◆</div>
-  fc_star_html: <div style="color:#AEB3B5">★</div>
-  perfect_html: <div style="color:#F4EF41">★</div>
+  0_html: '●'
+  1_html: '◆'
+  2_html: '★'
+  3_html: <div style="color:#008000">●</div>
+  4_html: <div style="color:#C47022">●</div>
+  5_html: <div style="color:#C47022">◆</div>
+  6_html: <div style="color:#C47022">★</div>
+  7_html: <div style="color:#AEB3B5">●</div>
+  8_html: <div style="color:#AEB3B5">◆</div>
+  9_html: <div style="color:#AEB3B5">★</div>
+  10_html: <div style="color:#F4EF41">★</div>
   date:
     formats:
       default: '%Y/%m/%d'
