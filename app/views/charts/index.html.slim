@@ -1,3 +1,7 @@
 .container
   h1 ="難易度表/LV#{@level}"
+  = search_form_for @q, url: charts_path do |f|
+    = f.hidden_field :level, value: @level
+    = f.select :random_option_eq, [['正規', 0], ['鏡', 1], ['乱', 2], ['S乱', 3]], {include_blank: 'ALL'}
+    = f.submit '絞り込み', level: @level
   = render 'charts/charts'
