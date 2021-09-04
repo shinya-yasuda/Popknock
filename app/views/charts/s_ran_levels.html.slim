@@ -1,2 +1,7 @@
 .container
   h1 S乱難易度表
+  .row
+    .col
+      .ul
+        - 19.downto(1) do |num|
+          .li = link_to("S乱#{num}", s_ran_index_charts_path(level: num))

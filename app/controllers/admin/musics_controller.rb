@@ -2,8 +2,14 @@ require 'image_process'
 class Admin::MusicsController < Admin::BaseController
   include ImageProcess
   before_action :set_music, only: %i[edit update destroy]
+  before_action :set_q, only: :index
+  before_action :set_r, only: :remain
   def index
-    @musics = Music.includes(:charts)
+    @musics = @q.result(distinct: true).includes(:charts).order(genre: :asc).page(params[:page])
+  end
+
+  def remain
+    @musics = @r.result(distinct: true).includes(:charts).order(genre: :asc).page(params[:page])
   end
 
   def new
@@ -11,23 +17,25 @@ class Admin::MusicsController < Admin::BaseController
   end
 
   def create
-    @music = Music.new(name: music_params[:name], genre: music_genre, pixels: pixels_array(load_image(music_params[:banner]), 21, 5))
+    @music = Music.new(name: music_params[:name], genre: music_genre, pixels: banner_pixels)
     if @music.save
       params[:level].each_with_index do |lv, i|
         Chart.create(music_id: @music.id, difficulty: i, level: lv)
       end
-      redirect_to admin_musics_path, success: '楽曲を追加しました'
+      redirect_to admin_musics_path, success: "楽曲#{@music.name}を追加しました"
     else
       flash.now[:danger] = '楽曲追加に失敗しました'
       render :new
     end
   end
 
-  def edit; end
+  def edit
+    @charts = @music.charts.order(difficulty: :asc)
+  end
 
   def update
-    if @music.update(name: music_params[:name], genre: music_genre, pixels: pixels_array(load_image(music_params[:banner]), 21, 5))
-      redirect_to admin_musics_path, success: '楽曲を更新しました'
+    if @music.update(name: music_params[:name], genre: music_genre, pixels: banner_pixels)
+      redirect_to remain_admin_musics_path, success: "#{@music.name}の情報を更新しました"
     else
       flash.now[:danger] = '楽曲更新に失敗しました'
       render :edit
@@ -62,17 +70,21 @@ class Admin::MusicsController < Admin::BaseController
     music_params[:genre].present? ? music_params[:genre] : music_params[:name]
   end
 
-  def color_hist
-    image = MiniMagick::Image.read(music_params[:banner])
-    image.resize '121x29'
-    pixels = image.get_pixels.map { |n| n.map { |m| m.map { |o| o / 64 } } }
-    color_hist = Array.new(64){0}
-    for x in 0..28 do
-      for y in 0..120 do
-        color = pixels[x][y][0] * 16 + pixels[x][y][1] * 4 + pixels[x][y][2]
-        color_hist[color] += 1
-      end
-    end
-    color_hist
+  def banner_pixels
+    return nil unless music_params[:banner]
+
+    image = load_image(music_params[:banner])
+    return nil if image[:height] != 58 && image[:height] != 400
+
+    image.crop('242x58+272+66') if image[:width] == 600 && image[:height] == 400
+    pixels_array(image, 21, 5)
+  end
+
+  def set_q
+    @q = Music.all.ransack(params[:q])
+  end
+
+  def set_r
+    @r = Music.where(pixels: nil).ransack(params[:q])
   end
 end

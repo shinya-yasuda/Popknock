@@ -1,7 +1,10 @@
 .container
-  h1 #{@chart.music.name}(#{@chart.difficulty})の編集
+  h1 #{@music.name}の譜面追加
   = form_with model: [:admin, :music, @chart], local: true do |f|
     = render 'shared/error_messages', object: f.object
+    .form-group
+      = f.label :difficulty
+      = f.select :difficulty, options_for_select(Chart.difficulties.keys)
     .form-group
       = f.label :level
       = f.number_field :level, class: 'form-control', min: 1, max: 50

@@ -2,10 +2,15 @@ Rails.application.routes.draw do
   get 'oauths/oauth'
   get 'oauths/callback'
   root to: 'static_pages#home'
-  resources :charts
-  get 'levels', to: 'charts#levels'
-  get 'ran_levels', to: 'charts#ran_levels'
-  get 's_ran_levels', to: 'charts#s_ran_levels'
+  resources :charts do
+    collection do
+      get :levels
+      get :ran_levels
+      get :s_ran_levels
+      get :ran_index
+      get :s_ran_index
+    end
+  end
   resources :results
   resources :users
   namespace :admin do
@@ -14,9 +19,10 @@ Rails.application.routes.draw do
     post 'logout', to: 'user_sessions#destroy', as: :logout
     resources :information
     resources :musics do
+      collection { get :remain }
       collection { post :csv_import }
+      resources :charts
     end
-    resources :charts
     resources :materials
   end
   get 'login', to: 'user_sessions#new', as: :login

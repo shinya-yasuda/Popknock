@@ -3,7 +3,9 @@
   = form_with model: @result, local: true do |f|
     = render 'shared/error_messages', object: f.object
     .form-group
-      = f.label :result
-      = f.file_field :result, class: 'form-control'
+      = f.label :image
+      = f.file_field :image, class: 'form-control', accept: '.jpg'
+    .form-group
+      = f.hidden_field :version, class: 'form-control', value: 26
     .form-group
       = f.submit '投稿', class: 'btn btn-primary'

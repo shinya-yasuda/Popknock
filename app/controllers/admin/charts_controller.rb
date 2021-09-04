@@ -1,5 +1,21 @@
 class Admin::ChartsController < Admin::BaseController
   before_action :set_chart, only: %i[edit update]
+  def new
+    @music = Music.find(params[:music_id])
+    @chart = Chart.new
+  end
+
+  def create
+    @music = Music.find(params[:music_id])
+    @chart = @music.charts.new(chart_params)
+    if @chart.save
+      redirect_to edit_admin_music_path(@music), success: '譜面を追加しました'
+    else
+      flash.now[:danger] = '譜面を追加出来ませんでした'
+      render :new
+    end
+  end
+
   def edit; end
 
   def update
@@ -18,6 +34,6 @@ class Admin::ChartsController < Admin::BaseController
   end
 
   def chart_params
-    params.require(:chart).permit(:level, :ran_level, :s_ran_level)
+    params.require(:chart).permit(:difficulty, :level, :ran_level, :s_ran_level)
   end
 end

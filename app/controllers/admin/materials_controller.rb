@@ -37,7 +37,7 @@ class Admin::MaterialsController < Admin::BaseController
   def set_material
     @material = Material.find(params[:id])
   end
-  
+
   def style_size
     sizes = { 'score' => [7, 7], 'bad' => [6, 8], 'good' => [6, 8],
               'difficulty' => [19, 4], 'gauge_option' => [13, 9], 'random' => [13, 9], 'gauge' => [5, 5] }

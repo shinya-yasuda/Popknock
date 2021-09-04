@@ -20,4 +20,25 @@ module ImageProcess
     end
     pixels_array.flatten
   end
+
+  def diff_abs(array1, array2)
+    (array1 - array2).abs
+  end
+
+  def distance(array1, array2)
+    diff_abs(array1, array2).sum
+  end
+
+  def data_params(target, array, index)
+    { id: index, distance: distance(target, array) }
+  end
+
+  def array_distances(target, list)
+    ary = []
+    list.each do |item, index|
+      temp_data_params = data_params(Numo::Int16.cast(target), Numo::Int16.cast(item), index)
+      ary << temp_data_params
+    end
+    ary
+  end
 end

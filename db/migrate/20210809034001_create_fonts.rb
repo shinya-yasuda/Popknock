@@ -4,7 +4,7 @@ class CreateFonts < ActiveRecord::Migration[6.0]
       t.integer :number, null: false
       t.integer :style, null: false
       t.integer :version, null: false
-      t.text :pixels, array: true
+      t.integer :pixels, array: true
     end
   end
 end

@@ -4,11 +4,11 @@
       li.nav-item
         = link_to('HOME', root_path, { class: 'nav-link' })
       li.nav-item
-        = link_to( '難易度表', levels_path, { class: 'nav-link' })
+        = link_to( '難易度表', levels_charts_path, { class: 'nav-link' })
       li.nav-item
-        = link_to( '乱難易度表', ran_levels_path, { class: 'nav-link' })
+        = link_to( '乱難易度表', ran_levels_charts_path, { class: 'nav-link' })
       li.nav-item
-        = link_to( 'S乱難易度表', s_ran_levels_path, { class: 'nav-link' })
+        = link_to( 'S乱難易度表', s_ran_levels_charts_path, { class: 'nav-link' })
       li.nav-item
         = link_to( 'リザルト投稿', new_result_path, { class: 'nav-link' })
       li.nav-item
@@ -18,4 +18,4 @@ nav.navbar.navbar-dark.bg-dark
   .container-fluid
     button.navbar-toggler type='button' data-bs-toggle='collapse' data-bs-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation'
       span.navbar-toggler-icon
-    = link_to("pop'n result_recorder", root_path, { class: 'navbar-brand' })
+    = link_to("ぽぷのっく", root_path, { class: 'navbar-brand' })

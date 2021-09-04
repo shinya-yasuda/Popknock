@@ -6,6 +6,7 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
+import 'chartkick/chart.js';
 import 'bootstrap';
 import '../stylesheets/application';
 

@@ -6,6 +6,8 @@
       li.nav-item
         = link_to('楽曲一覧', admin_musics_path, { class: 'nav-link' })
       li.nav-item
+        = link_to('バナー未追加楽曲一覧', remain_admin_musics_path, { class: 'nav-link' })
+      li.nav-item
         = link_to('楽曲追加', new_admin_music_path, { class: 'nav-link' })
       li.nav-item
         = link_to('文字画像追加', new_admin_material_path, { class: 'nav-link' })
@@ -19,4 +21,4 @@ nav.navbar.navbar-dark.bg-primary
   .container-fluid
     button.navbar-toggler type='button' data-bs-toggle='collapse' data-bs-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation'
       span.navbar-toggler-icon
-    = link_to("pop'n result_recorder", root_path, { class: 'navbar-brand' })
+    = link_to("ぽぷのっく", root_path, { class: 'navbar-brand' })
