@@ -29,6 +29,8 @@ class ChartsController < ApplicationController
     @results = @chart.results.where(user_id: current_user.id)
     @bad_graph = @results.order(created_at: :asc).pluck(:created_at, :bad)
     @score_graph = @results.order(created_at: :asc).pluck(:created_at, :score)
+    @max_score = @results.maximum(:score)&.ceil(-4)
+    @min_score = @results.minimum(:score)&.floor(-4)
   end
 
   private
