@@ -22,7 +22,7 @@ class Admin::MusicsController < Admin::BaseController
       params[:level].each_with_index do |lv, i|
         Chart.create(music_id: @music.id, difficulty: i, level: lv)
       end
-      redirect_to admin_musics_path, success: '楽曲を追加しました'
+      redirect_to admin_musics_path, success: "楽曲#{@music.name}を追加しました"
     else
       flash.now[:danger] = '楽曲追加に失敗しました'
       render :new
@@ -35,7 +35,7 @@ class Admin::MusicsController < Admin::BaseController
 
   def update
     if @music.update(name: music_params[:name], genre: music_genre, pixels: banner_pixels)
-      redirect_to remain_admin_musics_path, success: '楽曲を更新しました'
+      redirect_to remain_admin_musics_path, success: "#{@music.name}の情報を更新しました"
     else
       flash.now[:danger] = '楽曲更新に失敗しました'
       render :edit
@@ -71,7 +71,13 @@ class Admin::MusicsController < Admin::BaseController
   end
 
   def banner_pixels
-    pixels_array(load_image(music_params[:banner]), 21, 5) if music_params[:banner]
+    return nil unless music_params[:banner]
+
+    image = load_image(music_params[:banner])
+    return nil if image[:height] != 58 && image[:height] != 400
+
+    image.crop('242x58+272+66') if image[:width] == 600 && image[:height] == 400
+    pixels_array(image, 21, 5)
   end
 
   def set_q
