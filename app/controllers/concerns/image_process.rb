@@ -21,10 +21,6 @@ module ImageProcess
     pixels_array.flatten
   end
 
-  def result_params
-    params.require(:result).permit(:result)
-  end
-
   def diff_abs(array1, array2)
     (array1 - array2).abs
   end
