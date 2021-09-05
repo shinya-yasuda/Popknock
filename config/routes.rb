@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :musics do
       collection { get :remain }
       collection { post :csv_import }
+      collection { post :csv_edit }
       resources :charts
     end
     resources :materials
