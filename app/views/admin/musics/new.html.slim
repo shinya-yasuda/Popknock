@@ -7,3 +7,7 @@
   = form_with url: csv_import_admin_musics_path, local: true do |form|
     = form.file_field :file, accept: '.csv'
     = form.submit 'アップロード'
+  h3 CSVファイルで編集
+  = form_with url: csv_edit_admin_musics_path, local: true do |form|
+    = form.file_field :file, accept: '.csv'
+    = form.submit 'アップロード'

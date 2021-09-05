@@ -48,7 +48,12 @@ class Admin::MusicsController < Admin::BaseController
   end
 
   def csv_import
-    Music.import(params[:file])
+    Music.import_create(params[:file])
+    redirect_to admin_musics_path, success: 'CSVファイルの読み込みが完了しました'
+  end
+
+  def csv_edit
+    Music.import_edit(params[:file])
     redirect_to admin_musics_path, success: 'CSVファイルの読み込みが完了しました'
   end
 
