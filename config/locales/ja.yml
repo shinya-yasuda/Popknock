@@ -1,4 +1,5 @@
 ja:
+  _html: ''
   0_html: '●'
   1_html: '◆'
   2_html: '★'
@@ -6,10 +7,13 @@ ja:
   4_html: <div style="color:#C47022">●</div>
   5_html: <div style="color:#C47022">◆</div>
   6_html: <div style="color:#C47022">★</div>
-  7_html: <div style="color:#AEB3B5">●</div>
-  8_html: <div style="color:#AEB3B5">◆</div>
-  9_html: <div style="color:#AEB3B5">★</div>
-  10_html: <div style="color:#F4EF41">★</div>
+  7_html: <div style="color:#FF0000">●</div>
+  8_html: <div style="color:#FF0000">◆</div>
+  9_html: <div style="color:#FF0000">★</div>
+  10_html: <div style="color:#AEB3B5">●</div>
+  11_html: <div style="color:#AEB3B5">◆</div>
+  12_html: <div style="color:#AEB3B5">★</div>
+  13_html: <div style="color:#F4EF41">★</div>
   date:
     formats:
       default: '%Y/%m/%d'

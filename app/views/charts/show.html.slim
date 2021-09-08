@@ -1,5 +1,5 @@
 .container
-  h1 #{@chart.music.genre}(#{@chart.difficulty})
+  h1 #{@chart.music.name}(#{@chart.difficulty})
   table.table
     thead
       tr
@@ -12,7 +12,7 @@
       tr
         th クリアメダル
         - Result.random_options.each do |option|
-          td= t @results.medal_by_option(option)
+          td= t "#{@results.medal_by_option(option)}_html"
       tr
         th ハイスコア
         - Result.random_options.each do |option|
@@ -27,6 +27,6 @@
           td= @results.average_score(option, 10)&.floor
 
   h3 スコア
-  = line_chart [ { name: 'スコア', data: @score_graph.map { |record| [I18n.l(record[0]), record[1]] } } ], max: @max_score, min: @min_score
+  = line_chart(@score_graphs, max: @max_score, min: @min_score)
   h3 BAD数
-  = line_chart [ { name: 'BAD数', data: @bad_graph.map { |record| [I18n.l(record[0]), record[1]] } } ], min: 0
+  = line_chart(@bad_graphs, min: 0)
