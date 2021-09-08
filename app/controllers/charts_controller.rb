@@ -1,5 +1,6 @@
 class ChartsController < ApplicationController
-  before_action :set_q, only: %i[index ran_index s_ran_index show]
+  before_action :set_q, only: %i[index ran_index s_ran_index]
+  before_action :set_r, only: %i[index ran_index s_ran_index show]
   def levels; end
 
   def ran_levels; end
@@ -7,28 +8,32 @@ class ChartsController < ApplicationController
   def s_ran_levels; end
 
   def index
-    @level = params[:level] || params[:q][:level]
-    @charts = Chart.where(level: @level).joins(:music).merge(Music.where.not(pixels: nil))
-    @results = @q.result(distinct: true)
+    @charts = @q.result
+    @results = @r.result
   end
 
   def ran_index
-    @level = params[:level] || params[:q][:level]
+    @level = params[:level] || params[:r][:level]
     @charts = Chart.where(ran_level: @level).joins(:music).merge(Music.where.not(pixels: nil))
-    @results = current_user.results.where(random_option: 2)
+    @results = current_user.results.where(random_option: :random)
   end
 
   def s_ran_index
-    @level = params[:level] || params[:q][:level]
+    @level = params[:level] || params[:r][:level]
     @charts = Chart.where(s_ran_level: @level).joins(:music).merge(Music.where.not(pixels: nil))
-    @results = current_user.results.where(random_option: 3)
+    @results = current_user.results.where(random_option: :s-random)
   end
 
   def show
     @chart = Chart.find(params[:id])
-    @results = @chart.results.where(user_id: current_user.id)
-    @bad_graph = @results.order(created_at: :asc).pluck(:created_at, :bad)
-    @score_graph = @results.order(created_at: :asc).pluck(:created_at, :score)
+    @results = @chart.results.where(user_id: current_user.id).order(created_at: :asc)
+    @score_graphs = []
+    @bad_graphs = []
+    Result.random_options.each do |option|
+      @score_graphs << { name: option[0], data: @results.where(random_option: option).pluck(:created_at, :score).map { |record| [I18n.l(record[0]), record[1]] } }
+      @bad_graphs << { name: option[0], data: @results.where(random_option: option).pluck(:created_at, :bad).map { |record| [I18n.l(record[0]), record[1]] } }
+    end
+    #スコアグラフの上端と下端を10000の倍数にする
     @max_score = @results.maximum(:score)&.ceil(-4)
     @min_score = @results.minimum(:score)&.floor(-4)
   end
@@ -36,6 +41,11 @@ class ChartsController < ApplicationController
   private
 
   def set_q
-    @q = current_user.results.ransack(params[:q])
+    @level = params[:level] || params[:r][:level]
+    @q = Chart.where(level: @level).eager_load(:music, :results).order(genre: :asc).ransack(params[:q])
+  end
+
+  def set_r
+    @r = current_user.results.ransack(params[:r], search_key: :r)
   end
 end
