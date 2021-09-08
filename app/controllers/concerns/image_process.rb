@@ -11,7 +11,7 @@ module ImageProcess
     pixels_array = []
     for x in 0..(height - 1) do
       for y in 0..(width - 1) do
-        if pixels[x] and pixels[x][y]
+        if pixels[x] && pixels[x][y]
           pixels_array << [pixels[x][y][0], pixels[x][y][1], pixels[x][y][2]]
         else
           pixels_array << [0,0,0]
