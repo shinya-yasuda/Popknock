@@ -22,6 +22,13 @@ class ResultsController < ApplicationController
     end
   end
 
+  def destroy
+    result = Result.find(params[:id])
+    chart = result.chart
+    result.destroy!
+    redirect_to chart_path(chart), success: 'リザルトを削除しました'
+  end
+
   private
 
   def result_params
