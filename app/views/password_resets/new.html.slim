@@ -1,0 +1,8 @@
+.container
+  h1 パスワードリセット
+  = form_with url: password_resets_path, local: true, method: 'post' do |f|
+    .form-group
+      = f.label :email
+      = f.text_field :email, class: 'form-control'
+    .form-group
+      = f.submit 'パスワードリセット', class: 'btn btn-primary'

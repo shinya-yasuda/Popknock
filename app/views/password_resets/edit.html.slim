@@ -1,0 +1,15 @@
+.container
+  h1 パスワードリセット
+  = form_with model: @user, url: password_reset_path(@token), local: true do |f|
+    = render 'shared/error_messages', object: f.object
+    .form-group
+      = f.label :email
+      = @user.email
+    .form-group
+      = f.label :password
+      = f.password_field :password, class: 'form-control'
+    .form-group
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, class: 'form-control'
+    .form-group
+      = f.submit '適用', class: 'btn btn-primary'
