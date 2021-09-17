@@ -1,4 +1,8 @@
 ja:
+  regular: '正規'
+  mirror: 'ミラー'
+  random: 'ランダム'
+  s_random: 'S-ランダム'
   _html: ''
   0_html: '●'
   1_html: '◆'
@@ -10,10 +14,13 @@ ja:
   7_html: <div style="color:#FF0000">●</div>
   8_html: <div style="color:#FF0000">◆</div>
   9_html: <div style="color:#FF0000">★</div>
-  10_html: <div style="color:#AEB3B5">●</div>
-  11_html: <div style="color:#AEB3B5">◆</div>
-  12_html: <div style="color:#AEB3B5">★</div>
-  13_html: <div style="color:#F4EF41">★</div>
+  10_html: <div style="color:#9400D3">●</div>
+  11_html: <div style="color:#9400D3">◆</div>
+  12_html: <div style="color:#9400D3">★</div>
+  13_html: <div style="color:#AEB3B5">●</div>
+  14_html: <div style="color:#AEB3B5">◆</div>
+  15_html: <div style="color:#AEB3B5">★</div>
+  16_html: <div style="color:#F4EF41">★</div>
   date:
     formats:
       default: '%Y/%m/%d'
@@ -22,3 +29,31 @@ ja:
     formats:
       default: '%Y/%m/%d %H:%M:%S'
       short: '%m/%d'
+  activerecord:
+    models:
+      result: 'リザルト'
+    attributes:
+      result:
+        random_option: 'オプション'
+      result/gauge_option:
+        normal: 'NORMAL'
+        easy: 'EASY'
+        hard: 'HARD'
+        danger: 'DANGER'
+      result/random_option:
+        regular: '正規'
+        mirror: 'ミラー'
+        random: 'ランダム'
+        s_random: 'S-ランダム'
+  enums:
+    result:
+      gauge_option:
+        normal: 'NORMAL'
+        easy: 'EASY'
+        hard: 'HARD'
+        danger: 'DANGER'
+      random_option:
+        regular: '正規'
+        mirror: 'ミラー'
+        random: 'ランダム'
+        s_random: 'S-ランダム'
