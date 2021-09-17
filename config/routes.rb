@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       get :ran_index
       get :s_ran_index
     end
+    member do
+      get :detail
+    end
   end
   resources :results
   resources :users
