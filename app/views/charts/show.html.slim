@@ -1,13 +1,14 @@
 .container
   h1 #{@chart.music.name}(#{@chart.difficulty})
+  =link_to 'リザルト詳細', detail_chart_path(@chart)
   table.table
     thead
       tr
         th scope='col'
         th scope='col' 正規
         th scope='col' ミラー
-        th scope='col' 乱
-        th scope='col' S乱
+        th scope='col' ランダム
+        th scope='col' S-ランダム
     tbody
       tr
         th クリアメダル
