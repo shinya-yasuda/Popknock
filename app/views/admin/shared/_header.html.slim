@@ -1,24 +1,22 @@
-.collapse#navbarToggleExternalContent
-  .bg-light.p-4
-    ul.nav.flex-column
-      li.nav-item
-        = link_to('HOME', root_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to('楽曲一覧', admin_musics_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to('バナー未追加楽曲一覧', remain_admin_musics_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to('楽曲追加', new_admin_music_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to('文字画像追加', new_admin_material_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to('文字画像一覧', admin_materials_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to('お知らせ追加', new_admin_information_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to('お知らせ一覧', admin_information_index_path, { class: 'nav-link' })
-nav.navbar.navbar-dark.bg-primary
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   .container-fluid
-    button.navbar-toggler type='button' data-bs-toggle='collapse' data-bs-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation'
+    a.navbar-brand href='/'
+      | ぽぷのっく管理画面
+    button.navbar-toggler aria-controls="navbarTogglerHeader" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarTogglerHeader" data-bs-toggle="collapse" type="button" 
       span.navbar-toggler-icon
-    = link_to("ぽぷのっく", root_path, { class: 'navbar-brand' })
+    .collapse.navbar-collapse#navbarTogglerHeader
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          = link_to('楽曲一覧', admin_musics_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to('バナー未追加楽曲一覧', remain_admin_musics_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to('楽曲追加', new_admin_music_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to('文字画像追加', new_admin_material_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to('文字画像一覧', admin_materials_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to('お知らせ追加', new_admin_information_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to('お知らせ一覧', admin_information_index_path, { class: 'nav-link' })
