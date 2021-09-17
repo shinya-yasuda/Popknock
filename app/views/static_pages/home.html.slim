@@ -6,7 +6,14 @@
     | このサイトについて
   p
     | ぽぷのっくはポップンミュージックのプレーシェア画像を投稿することでオプション別でスコアやBAD数の推移を管理出来るサイトです。
-
+  - unless logged_in?
+    p
+      | Twitterアカウントをお持ちであればこちらのボタンからすぐにログインできます。
+    = link_to  auth_at_provider_path(provider: :twitter), class: 'btn btn-block btn-primary' do
+      i.fab.fa-twitter
+      | Twitterでログイン
+    p
+      | Twitterアカウントをお持ちで無い場合はメニューからメールアドレスを使用して登録・ログインできます。
   h2
     | 更新情報
   .d-flex.flex-column.p-2.bd-highlight
