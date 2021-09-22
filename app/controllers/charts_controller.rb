@@ -1,7 +1,9 @@
 class ChartsController < ApplicationController
   before_action :set_q, only: %i[index ran_index s_ran_index]
   before_action :set_r, only: %i[index ran_index s_ran_index show]
-  def levels; end
+  def levels
+    @results = current_user.results.decorate
+  end
 
   def ran_levels; end
 

@@ -41,6 +41,10 @@ class Result < ApplicationRecord
     def average_score(option, count)
       where(random_option: option).order(created_at: :desc).limit(count).average(:score)
     end
+
+    def pickup_level(level)
+      eager_load(:chart).where("charts.level = ?", level)
+    end
   end
 
   def analyze_image(file, version)
