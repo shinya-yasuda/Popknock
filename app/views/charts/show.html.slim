@@ -1,18 +1,19 @@
 .container
-  h1 #{@chart.music.genre}(#{@chart.difficulty})
+  h1 #{@chart.music.name}(#{@chart.difficulty})
+  =link_to 'リザルト詳細', detail_chart_path(@chart)
   table.table
     thead
       tr
         th scope='col'
         th scope='col' 正規
         th scope='col' ミラー
-        th scope='col' 乱
-        th scope='col' S乱
+        th scope='col' ランダム
+        th scope='col' S-ランダム
     tbody
       tr
         th クリアメダル
         - Result.random_options.each do |option|
-          td= t @results.medal_by_option(option)
+          td= t "#{@results.medal_by_option(option)}_html"
       tr
         th ハイスコア
         - Result.random_options.each do |option|
@@ -26,7 +27,7 @@
         - Result.random_options.each do |option|
           td= @results.average_score(option, 10)&.floor
 
-  h3 スコア
-  = line_chart [ { name: 'スコア', data: @score_graph.map { |record| [I18n.l(record[0]), record[1]] } } ], max: @max_score, min: @min_score
-  h3 BAD数
-  = line_chart [ { name: 'BAD数', data: @bad_graph.map { |record| [I18n.l(record[0]), record[1]] } } ], min: 0
+  h3 スコアグラフ
+  = line_chart(@score_graphs, max: @max_score, min: @min_score)
+  h3 BAD数グラフ
+  = line_chart(@bad_graphs, min: 0)

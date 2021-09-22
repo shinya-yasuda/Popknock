@@ -1,9 +1,9 @@
 .container
   h1 リザルト投稿
+  | プレーシェア画像を選択し、投稿すると画像からリザルトのデータを自動的に取得して保存できます。
   = form_with model: @result, local: true do |f|
     = render 'shared/error_messages', object: f.object
     .form-group
-      = f.label :image
       = f.file_field :image, class: 'form-control', accept: '.jpg'
     .form-group
       = f.hidden_field :version, class: 'form-control', value: 26

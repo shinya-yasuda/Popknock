@@ -1,6 +1,7 @@
 .container
   h1 ログイン/管理者
   = form_with url: admin_login_path, method: 'post', local: true do |f|
+    = render 'shared/error_messages', object: f.object
     .form-group
       = f.label :email
       = f.text_field :email, class: 'form-control', value: ''

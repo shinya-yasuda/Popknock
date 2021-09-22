@@ -1,5 +1,5 @@
 class Admin::ChartsController < Admin::BaseController
-  before_action :set_chart, only: %i[edit update]
+  before_action :set_chart, only: %i[edit update destroy]
   def new
     @music = Music.find(params[:music_id])
     @chart = Chart.new
@@ -20,11 +20,17 @@ class Admin::ChartsController < Admin::BaseController
 
   def update
     if @chart.update(chart_params)
-      redirect_to admin_musics_path, success: '譜面情報を更新しました'
+      redirect_to edit_admin_music_path(@chart.music), success: '譜面情報を更新しました'
     else
       flash.now[:danger] = '譜面更新に失敗しました'
       render :edit
     end
+  end
+
+  def destroy
+    @music = Music.find(params[:music_id])
+    @chart.destroy!
+    redirect_to edit_admin_music_path(@music), success: '譜面を削除しました'
   end
 
   private

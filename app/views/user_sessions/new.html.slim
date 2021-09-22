@@ -1,0 +1,12 @@
+.container
+  h1 ログイン
+  = form_with url: login_path, method: 'post', local: true do |f|
+    .form-group
+      = f.label :email
+      = f.text_field :email, class: 'form-control', value: ''
+    .form-group
+      = f.label :password
+      = f.password_field :password, class: 'form-control', value: ''
+    .form-group
+      = f.submit 'ログイン', class: 'btn btn-primary'
+  = link_to 'パスワードをお忘れの方はこちら', new_password_reset_path

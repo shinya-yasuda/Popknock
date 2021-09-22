@@ -2,6 +2,7 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
+  cattr_accessor :current_user
 
   has_many :results, dependent: :destroy
   validates :password, presence: true, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }

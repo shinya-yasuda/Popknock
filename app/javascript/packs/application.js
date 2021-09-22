@@ -8,6 +8,7 @@ require("@rails/activestorage").start()
 require("channels")
 import 'chartkick/chart.js';
 import 'bootstrap';
+import '@fortawesome/fontawesome-free/js/all';
 import '../stylesheets/application';
 
 

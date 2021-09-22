@@ -1,9 +1,16 @@
 .container
   h1 難易度表
-  .row
-    - 5.downto(1) do |x|
-      .col
-        .ul 
-          - (x * 10).downto(x * 10 - 9) do |num|
-            .li
-              = link_to("LV#{num}", charts_path(level: num))
+  table.table
+    thead
+      tr
+        th.text-nowrap scope='col' LV
+        th.text-nowrap scope='col' クリア率
+        th.text-nowrap scope='col' ハイスコア平均
+        th.text-nowrap scope='col' 最少BAD平均
+    tbody
+      - 50.downto(1) do |i|
+        tr
+          td= link_to( "#{i}", charts_path(level: i))
+          td= "#{@results.clear_percentage(i)}%"
+          td= @results.average_score_level(i)
+          td= @results.average_bad_level(i)

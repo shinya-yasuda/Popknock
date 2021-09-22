@@ -1,21 +1,14 @@
-.collapse#navbarToggleExternalContent
-  .bg-dark.p-4
-    ul.nav.flex-column
-      li.nav-item
-        = link_to('HOME', root_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to( '難易度表', levels_charts_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to( '乱難易度表', ran_levels_charts_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to( 'S乱難易度表', s_ran_levels_charts_path, { class: 'nav-link' })
-      li.nav-item
-        = link_to( 'リザルト投稿', new_result_path, { class: 'nav-link' })
-      li.nav-item
-        a.nav-link href='#'
-          | プロフィール
-nav.navbar.navbar-dark.bg-dark
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   .container-fluid
-    button.navbar-toggler type='button' data-bs-toggle='collapse' data-bs-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation'
+    a.navbar-brand href='/'
+      | ぽぷのっく
+    button.navbar-toggler aria-controls="navbarTogglerHeader" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarTogglerHeader" data-bs-toggle="collapse" type="button" 
       span.navbar-toggler-icon
-    = link_to("ぽぷのっく", root_path, { class: 'navbar-brand' })
+    .collapse.navbar-collapse#navbarTogglerHeader
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          = link_to( '難易度表', levels_charts_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to( 'リザルト投稿', new_result_path, { class: 'nav-link' })
+        li.nav-item
+          = link_to( 'ログアウト', :logout, { method: :post, class: 'nav-link', data: { confirm: 'ログアウトしますか？' } })

@@ -1,21 +1,19 @@
-- if @charts.present?
-  table.table
-    thead
-      tr
-        th scope='col' ジャンル名
-        th scope='col' 曲名
-        th scope='col' 難易度
-        th scope='col' メダル
-        th scope='col' ハイスコア
-        th scope='col' 最少BAD
-    tbody
-      - @charts.each do |c|
+  .table-responsive
+    table.table
+      thead
         tr
-          td= link_to("#{c.music.genre}" , chart_path(c))
-          td #{c.music.name}
-          td #{c.difficulty}
-          td= t @results.best_medal(c)
-          td= @results.hi_score(c)
-          td= @results.least_bad(c)
-- else
-  曲がありません
+          th.text-nowrap= sort_link(@q, :music_genre, 'ジャンル名')
+          th.text-nowrap= sort_link(@q, :music_name, '曲名')
+          th.text-nowrap scope='col' 難易度
+          th.text-nowrap= sort_link(@q, :best_medal, 'メダル')
+          th.text-nowrap= sort_link(@q, :best_score, 'ハイスコア')
+          th.text-nowrap= sort_link(@q, :least_bad, '最少BAD')
+      tbody
+        - @charts.each do |c|
+          tr
+            td= link_to("#{c.music.genre}" , chart_path(c))
+            td #{c.music.name}
+            td #{c.difficulty}
+            td= t "#{@results.best_medal(c)}_html"
+            td= @results.hi_score(c)
+            td= @results.least_bad(c)

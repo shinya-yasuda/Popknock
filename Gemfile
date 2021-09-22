@@ -48,6 +48,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'letter_opener_web'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -59,6 +60,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'chartkick'
 gem 'dotenv-rails'
 gem 'draper'
+gem 'enum_help'
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 gem 'mini_magick'
 gem 'numo-narray'
