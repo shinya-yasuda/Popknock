@@ -319,7 +319,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.11.0)
       parser (>= 3.0.1.1)
-    ruby-opencv (0.0.18)
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.3)
       ffi (~> 1.12)
@@ -432,7 +431,6 @@ DEPENDENCIES
   roo
   rspec-rails
   rubocop
-  ruby-opencv
   rumale
   sass-rails (>= 6)
   seed_dump
