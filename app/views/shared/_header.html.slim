@@ -9,13 +9,6 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         li.nav-item
           = link_to( '難易度表', levels_charts_path, { class: 'nav-link' })
         li.nav-item
-          = link_to( '乱難易度表(準備中)', '#', { class: 'nav-link' })
-        li.nav-item
-          = link_to( 'S乱難易度表(準備中)', '#', { class: 'nav-link' })
-        li.nav-item
           = link_to( 'リザルト投稿', new_result_path, { class: 'nav-link' })
         li.nav-item
-          a.nav-link href='#'
-            | プロフィール
-        li.nav-item
-          = link_to( 'ログアウト', :logout, { method: :post, class: 'nav-link' })
+          = link_to( 'ログアウト', :logout, { method: :post, class: 'nav-link', data: { confirm: 'ログアウトしますか？' } })

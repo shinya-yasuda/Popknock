@@ -27,7 +27,7 @@
         - Result.random_options.each do |option|
           td= @results.average_score(option, 10)&.floor
 
-  h3 スコア
+  h3 スコアグラフ
   = line_chart(@score_graphs, max: @max_score, min: @min_score)
-  h3 BAD数
+  h3 BAD数グラフ
   = line_chart(@bad_graphs, min: 0)

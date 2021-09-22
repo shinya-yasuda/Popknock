@@ -15,7 +15,7 @@ class ResultsController < ApplicationController
     @result.analyze_image(result_params[:image], result_params[:version])
     @result.get_medal
     if @result.save
-      redirect_to new_result_path, success: "#{@result.chart.music.name}のリザルトを投稿しました"
+      redirect_to new_result_path, success: "LV#{@result.chart.level} #{@result.chart.music.name}(#{chart.difficulty})のリザルトを投稿しました"
     else
       flash.now[:danger] = 'リザルト画像を正常に分析出来ませんでした'
       render :new
