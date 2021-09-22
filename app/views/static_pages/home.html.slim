@@ -4,21 +4,51 @@
       | HOME
   h2
     | このサイトについて
-  p
-    | ぽぷのっくはポップンミュージックのプレーシェア画像を投稿することでオプション別でスコアやBAD数の推移を管理出来るサイトです。
+  | ぽぷのっくはポップンミュージックのプレーシェア画像を投稿することで楽曲ごとに各オプションでのスコアやBAD数の推移を管理出来るサイトです。
   - unless logged_in?
     p
-      | Twitterアカウントをお持ちであればこちらのボタンからすぐにログインできます。
+      | Twitterアカウントをお持ちであればこちらのボタンからすぐに登録・ログインできます。
     = link_to  auth_at_provider_path(provider: :twitter), class: 'btn btn-block btn-primary' do
       i.fab.fa-twitter
       | Twitterでログイン
     p
-      | Twitterアカウントをお持ちで無い場合はメニューからメールアドレスを使用して登録・ログインできます。
+      | Twitterアカウントをお持ちで無い場合はヘッダーのメニューからメールアドレスを使用して登録・ログインできます。
   h2
-    | 更新情報
-  .d-flex.flex-column.p-2.bd-highlight
-    - @information_list.each do |i|
-      .card
-        .card-body
-          h3.card-title #{i.title}
-          p.card-text = safe_join(i.body.split("\n"), tag(:br))
+    | プレーシェア画像の保存方法
+  ol
+    li
+      | e-amusementアプリにプレーシェア画像を投稿します。プレーシェア画像の投稿のしかたは
+      a href='https://p.eagate.573.jp/game/popn/riddles/howto/more.html#more_08' こちら
+    li e-amusementアプリ内のタイムラインから自分の投稿を選択(図1)し、投稿詳細画面で画像をタップします。(図2)
+    li 画像が表示されたら右上の歯車マークをタップして画像を保存します。(図3)
+  .row
+    .col-6.col-md-4
+      h4 図1
+      = image_tag('select_timeline.png', width: '100%')
+    .col-6.col-md-4
+      h4 図2
+      = image_tag('post_show.png', width: '100%')
+    .col-6.col-md-4
+      h4 図3
+      = image_tag('image_show.png', width: '100%')
+  h2
+    | お知らせ
+  - if @information_list.present?
+    .d-flex.flex-column.p-2.bd-highlight
+      - @information_list.each do |i|
+        .card
+          .card-body
+            h3.card-title #{i.title}
+            p.card-text = safe_join(i.body.split("\n"), tag(:br))
+  - else
+    p お知らせはまだありません
+  h2
+    | 注意事項
+  ul
+    li 当サイトは投稿されたプレーシェア画像から得られたデータを保存しますが、画像そのものを保存することはありません。
+    li 新曲が追加された場合、対応が完了するまでは新曲のプレーシェア画像を投稿しても正常に動作しません。
+    li リザルト投稿をする場合は、必ずe-amusementアプリまたはe-amusementサイトで保存したプレーシェア画像を使用してください。スクリーンショットや筐体の画面を直接撮影した画像は使用できません。
+    li 当サイトは個人が運営しているサイトであり、株式会社コナミアミューズメントとは一切関係ありません。
+    li 当サイトはユーザーに予告することなくサービスを一時停止・終了する可能性があります。
+    li 何らかの不具合・障害によりデータが破損した場合でも管理人は一切の保証を行いません。
+    li 当サイトの利用によって生じた損失・損害について管理人は一切責任を負いません。
