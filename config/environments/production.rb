@@ -64,6 +64,7 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  pass = ENV['APP_PASS']
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { protocol: 'https', host: 'popknock.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
@@ -73,7 +74,7 @@ Rails.application.configure do
     port: 587,
     domain: 'gmail.com',
     user_name: 'infopopknock@gmail.com',
-    password: ENV['APP_PASS'],
+    password: pass,
     authentication: :plain
   }
 
