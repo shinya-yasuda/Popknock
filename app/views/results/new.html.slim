@@ -1,6 +1,8 @@
 .container
   h1 リザルト投稿
   | プレーシェア画像を選択し、投稿すると画像からリザルトのデータを自動的に取得して保存できます。
+  br
+  | ※現在は解明リドルズのプレーシェア画像にのみ対応しています。他のバージョンの画像は正常に読み取れません。
   = form_with model: @result, local: true do |f|
     = render 'shared/error_messages', object: f.object
     .form-group
