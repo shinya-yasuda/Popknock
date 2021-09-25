@@ -25,7 +25,7 @@ class Chart < ApplicationRecord
       cropped_image = load_image(file).crop('242x58+272+66')
       target = pixels_array(cropped_image, 21, 5)
       data_array = array_distances(target, Music.where.not(pixels: nil).pluck(:pixels, :id))
-      data_array.min_by { |x| x[:distance] }[:id]
+      data_array.min_by { |x| x[:distance] }[:id] if data_array.min_by { |x| x[:distance] }[:distance] < 20
     end
 
     def difficulty(file)

@@ -7,17 +7,22 @@ class ResultsController < ApplicationController
 
   def create
     unless check_image
-      redirect_to new_result_path, danger: '適切なリザルト画像が投稿されていません'
+      redirect_to new_result_path, danger: 'プレーシェア画像を投稿してください'
       return
     end
+    @result = Result.new
     chart = Chart.search_by_image(result_params[:image])
-    @result = current_user.results.new(chart_id: chart.id)
-    @result.analyze_image(result_params[:image], result_params[:version])
-    @result.get_medal
-    if @result.save
-      redirect_to new_result_path, success: "LV#{@result.chart.level} #{@result.chart.music.name}(#{chart.difficulty})のリザルトを投稿しました"
+    if chart && @result.get_version(result_params[:image])
+      @result = current_user.results.new(chart_id: chart.id)
+      @result.analyze_image(result_params[:image])
+      if @result.save
+        redirect_to new_result_path, success: "LV#{@result.chart.level} #{@result.chart.music.name}(#{chart.difficulty})のリザルトを投稿しました"
+      else
+        flash.now[:danger] = 'リザルトの読み取り中にエラーが発生しました'
+        render :new
+      end
     else
-      flash.now[:danger] = 'リザルト画像を正常に分析出来ませんでした'
+      flash.now[:danger] = 'この画像には対応していません'
       render :new
     end
   end

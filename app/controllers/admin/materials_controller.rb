@@ -40,7 +40,8 @@ class Admin::MaterialsController < Admin::BaseController
 
   def style_size
     sizes = { 'score' => [7, 7], 'bad' => [6, 8], 'good' => [6, 8], 'difficulty' => [19, 4], 'gauge_option' => [13, 9],
-              'random' => [13, 9], 'gauge' => [5, 5], 'gauge_option_simple' => [5, 5], 'option_type' => [10, 5] }
+              'random' => [13, 9], 'gauge' => [5, 5], 'gauge_option_simple' => [5, 5], 'option_type' => [10, 5],
+              'version' => [20, 5], 'date' => [6, 11] }
     sizes[material_params[:style]]
   end
 end

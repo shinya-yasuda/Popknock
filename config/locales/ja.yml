@@ -35,6 +35,7 @@ ja:
     attributes:
       result:
         random_option: 'オプション'
+        played_at: 'プレイ日時'
       result/gauge_option:
         normal: 'NORMAL'
         easy: 'EASY'

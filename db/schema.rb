@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_034225) do
+ActiveRecord::Schema.define(version: 2021_09_25_063653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_09_17_034225) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "gauge_amount"
     t.integer "gauge_option"
+    t.datetime "played_at"
     t.index ["chart_id"], name: "index_results_on_chart_id"
     t.index ["user_id"], name: "index_results_on_user_id"
   end

@@ -5,6 +5,7 @@ class Result < ApplicationRecord
   validates :random_option, presence: true
   validates :score, inclusion: { in: 0..100_000 }
   validates :gauge_amount, inclusion: { in: 0..24 }
+  validates :played_at, uniqueness: { scope: [:user_id, :chart_id], message: 'と楽曲が同じリザルトが既にあります' }
   enum gauge_option: { normal: 0, easy: 1, hard: 2, danger: 3 }
   enum random_option: { regular: 0, mirror: 1, random: 2, s_random: 3 }
   enum medal: { fail_circle: 0, fail_square: 1, fail_star: 2,
@@ -47,11 +48,13 @@ class Result < ApplicationRecord
     end
   end
 
-  def analyze_image(file, version)
+  def analyze_image(file)
+    version = get_version(file)
     self.score = get_score(file, version)
     self.bad = get_bad(file, version)
     self.good = get_good(file, version)
     self.gauge_amount = get_gauge_amount(file, version)
+    self.played_at = get_played_at(file, version)
     if simple_check(file, version)
       self.gauge_option = get_gauge_option_simple(file, version)
       self.random_option = :regular
@@ -59,6 +62,7 @@ class Result < ApplicationRecord
       self.gauge_option = get_gauge_option(file, version)
       self.random_option = get_random_option(file, version)
     end
+    self.get_medal
   end
 
   def simple_check(file, version)
@@ -66,11 +70,16 @@ class Result < ApplicationRecord
     get_number(file, materials, 30, 15, 10, 5, 293, 330) == 0
   end
 
+  def get_version(file)
+    materials = Material.where(style: :version).pluck(:pixels, :version)
+    get_number(file, materials, 60, 15, 20, 5, 296, 185)
+  end
+  
   def get_number(file, array, x, y, resize_x, resize_y, margin_x, margin_y)
     cropped_image = load_image(file).crop("#{x}x#{y}+#{margin_x}+#{margin_y}")
     target = pixels_array(cropped_image, resize_x, resize_y)
     data_array = array_distances(target, array)
-    data_array.min_by { |n| n[:distance] }[:id]
+    data_array.min_by { |n| n[:distance] }[:id] if data_array.min_by { |n| n[:distance] }[:distance] < 20
   end
 
   def get_score(file, version)
@@ -85,8 +94,8 @@ class Result < ApplicationRecord
   def get_bad(file, version)
     bad = ''
     materials = Material.where(style: :bad, version: version).pluck(:pixels, :number)
-    0.upto(2) do |i|
-      bad += get_number(file, materials, 12, 16, 6, 8, 369+i*13, 265).to_s
+    0.upto(3) do |i|
+      bad += get_number(file, materials, 12, 16, 6, 8, 356+i*13, 265).to_s
     end
     bad.to_i
   end
@@ -94,8 +103,8 @@ class Result < ApplicationRecord
   def get_good(file, version)
     good = ''
     materials = Material.where(style: :good, version: version).pluck(:pixels, :number)
-    0.upto(2) do |i|
-      good += get_number(file, materials, 12, 16, 6, 8, 369+i*13, 248).to_s
+    0.upto(3) do |i|
+      good += get_number(file, materials, 12, 16, 6, 8, 356+i*13, 248).to_s
     end
     good.to_i
   end
@@ -121,6 +130,16 @@ class Result < ApplicationRecord
       return i if get_number(file, materials, 5, 5, 5, 5, 263+i*13, 158) == 1
     end
     0
+  end
+
+  def get_played_at(file, version)
+    materials = Material.where(style: :date, version: version).pluck(:pixels, :number)
+    starts = [15, 22, 29, 36, 50, 57, 71, 78, 92, 99, 112, 119, 132, 139]
+    time = ''
+    0.upto(13) do |i|
+      time += get_number(file, materials, 6, 11, 6, 11, starts[i], 18).to_s
+    end
+    Time.strptime(time, '%Y%m%d%H%M%S')
   end
 
   def get_medal

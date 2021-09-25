@@ -26,7 +26,7 @@ module ImageProcess
   end
 
   def distance(array1, array2)
-    diff_abs(array1, array2).sum
+    diff_abs(array1, array2).sum / array1.length.to_f
   end
 
   def data_params(target, array, index)
