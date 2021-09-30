@@ -1,7 +1,7 @@
 class Admin::InformationController < Admin::BaseController
   before_action :set_information, only: %i[edit update destroy]
   def index
-    @information_list = Information.all
+    @information_list = Information.limit(5).order(updated_at: :desc)
   end
 
   def new
