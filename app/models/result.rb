@@ -146,14 +146,14 @@ class Result < ApplicationRecord
     self.medal = if bad == 0
                    (:perfect if good == 0) || (:fc_star if good <= 5) || (:fc_square if good <= 20) || :fc_circle
                  elsif gauge_amount >= 17
-                   if gauge_option == :danger
+                   if gauge_option == 'danger'
                      (:danger_star if bad <= 5) || (:danger_square if bad <= 20) || :danger_circle
-                   elsif gauge_option == :hard
+                   elsif gauge_option == 'hard'
                      (:hard_star if bad <= 5) || (:hard_square if bad <= 20) || :hard_circle
                    else
-                     (:clear_easy if gauge_option == :easy) || (:clear_star if bad <= 5) || (:clear_square if bad <= 20) || :clear_circle
+                     (:clear_easy if gauge_option == 'easy') || (:clear_star if bad <= 5) || (:clear_square if bad <= 20) || :clear_circle
                    end
-                 elsif gauge_option != :easy
+                 elsif gauge_option != 'easy'
                    (:fail_star if gauge_amount >= 15)|| (:fail_square if gauge_amount >= 12) || :fail_circle
                  else
                    :fail_circle
