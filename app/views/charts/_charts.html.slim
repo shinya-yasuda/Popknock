@@ -5,9 +5,9 @@
           th.text-nowrap= sort_link(@q, :music_genre, 'ジャンル名')
           th.text-nowrap= sort_link(@q, :music_name, '曲名')
           th.text-nowrap scope='col' 難易度
-          th.text-nowrap= sort_link(@q, :best_medal, 'メダル')
-          th.text-nowrap= sort_link(@q, :best_score, 'ハイスコア')
-          th.text-nowrap= sort_link(@q, :least_bad, '最少BAD')
+          th.text-nowrap scope='col' メダル
+          th.text-nowrap scope='col' ハイスコア
+          th.text-nowrap scope='col' 最少BAD
       tbody
         - @charts.each do |c|
           tr
