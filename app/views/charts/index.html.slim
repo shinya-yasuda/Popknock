@@ -2,6 +2,6 @@
   h1 ="難易度表/LV#{@level}"
   = search_form_for(@r, as: :r, url: charts_path)do |f|
     = f.hidden_field :level, value: @level
-    = f.select :random_option_eq, [['正規', 0], ['ミラー', 1], ['ランダム', 2], ['S-ランダム', 3]], {include_blank: 'オプション選択'}
+    = f.select :random_option_eq, [['正規', 0], ['ミラー', 1], ['ランダム', 2], ['S-ランダム', 3]], {include_blank: '全オプション'}
     = f.submit '絞り込み', level: @level
   = render 'charts/charts'
