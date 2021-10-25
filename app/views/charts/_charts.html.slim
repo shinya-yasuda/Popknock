@@ -2,12 +2,12 @@
     table.table
       thead
         tr
-          th.text-nowrap= sort_link(@q, :music_genre, 'ジャンル名')
-          th.text-nowrap= sort_link(@q, :music_name, '曲名')
+          th.text-nowrap scope='col' ジャンル名
+          th.text-nowrap scope='col' 曲名
           th.text-nowrap scope='col' 難易度
-          th.text-nowrap scope='col' メダル
-          th.text-nowrap scope='col' ハイスコア
-          th.text-nowrap scope='col' 最少BAD
+          th.text-nowrap= sort_order( 'medal', 'メダル')
+          th.text-nowrap= sort_order( 'score', 'ハイスコア')
+          th.text-nowrap= sort_order( 'bad', '最少BAD')
       tbody
         - @charts.each do |c|
           tr

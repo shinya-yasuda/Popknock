@@ -1,8 +1,12 @@
 class ChartsController < ApplicationController
-  before_action :set_q, only: %i[index ran_index s_ran_index]
-  before_action :set_r, only: %i[index ran_index s_ran_index show]
+  helper_method :sort_direction
   def levels
-    @results = current_user.results.decorate
+    @option = params[:option]
+    @results = if @option.present?
+                 current_user.results.where(random_option: @option).decorate
+               else
+                 current_user.results.decorate
+               end
   end
 
   def ran_levels; end
@@ -10,8 +14,27 @@ class ChartsController < ApplicationController
   def s_ran_levels; end
 
   def index
-    @charts = @q.result
-    @results = @r.result
+    @level = params[:level]
+    @option = params[:option]
+    @results = if @option.present?
+                 current_user.results.eager_load(:chart).where(charts: { level: @level }, random_option: @option)
+               else
+                 current_user.results.eager_load(:chart).where(charts: { level: @level })
+               end
+    if params[:sort].present?
+      case params[:column]
+      when 'medal'
+        @charts = Chart.sort_charts_medal(@results, params[:sort], @level)
+      when 'score'
+        @charts = Chart.sort_charts_score(@results, params[:sort], @level)
+      when 'bad'
+        @charts = Chart.sort_charts_bad(@results, params[:sort], @level)
+      else
+        @charts = Chart.where(level: @level).joins(:music).order(genre: :asc)
+      end
+    else
+      @charts = Chart.where(level: @level).joins(:music).order(genre: :asc)
+    end
   end
 
   def ran_index
@@ -47,12 +70,8 @@ class ChartsController < ApplicationController
 
   private
 
-  def set_q
-    @level = params[:level] || params[:r][:level]
-    @q = Chart.where(level: @level).eager_load(:music, :results).order(genre: :asc).ransack(params[:q])
+  def sort_direction
+    %w[asc desc].include?(params[:sort]) ? params[:sort] : 'asc'
   end
 
-  def set_r
-    @r = current_user.results.ransack(params[:r], search_key: :r)
-  end
 end

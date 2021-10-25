@@ -34,5 +34,32 @@ class Chart < ApplicationRecord
       data_array = array_distances(target, Material.where(style: :difficulty).pluck(:pixels, :number))
       data_array.min_by { |x| x[:distance] }[:id]
     end
+
+    def sort_charts_medal(results, direction, level)
+      hash = results.group(:chart_id).maximum(:medal)
+      get_sorted_charts(hash, direction, level)
+    end
+
+    def sort_charts_score(results, direction, level)
+      hash = results.group(:chart_id).maximum(:score)
+      get_sorted_charts(hash, direction, level)
+    end
+
+    def sort_charts_bad(results, direction, level)
+      hash = results.group(:chart_id).minimum(:bad)
+      get_sorted_charts(hash, direction, level)
+    end
+
+    def get_sorted_charts(hash, direction, level)
+      array = direction == 'desc' ? hash.sort_by { |_, v| v } : hash.sort_by { |_, v| v }.reverse
+      charts = []
+      level_charts = Chart.where(level: level).to_a
+      array.each do |a|
+        chart =  Chart.find(a[0])
+        charts << chart
+        level_charts.delete(chart)
+      end
+      charts + level_charts
+    end
   end
 end
