@@ -1,5 +1,10 @@
 .container
   h1 難易度表
+  = form_with url: levels_charts_path, method: :get, local: true do |f|
+    .form-group
+      = f.hidden_field :level, value: @level
+      = f.select :option,[['正規', 0], ['ミラー', 1], ['ランダム', 2], ['S-ランダム', 3]], {include_blank: '全オプション', selected: @option }
+    = f.submit '絞り込み'
   table.table
     thead
       tr
