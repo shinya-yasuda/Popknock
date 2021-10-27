@@ -1,4 +1,5 @@
 Chartkick.options = {
   curve: false,
-  discrete: true
+  discrete: true,
+  library: { spanGaps: true }
 }

@@ -83,30 +83,30 @@ class Result < ApplicationRecord
   end
 
   def get_score(file, version)
-    score = ''
+    score = 0
     materials = Material.where(style: :score, version: version).pluck(:pixels, :number)
     0.upto(5) do |i|
-      score += get_number(file, materials, 35, 35, 7, 7, 358+i*38, 176).to_s
+      score += get_number(file, materials, 35, 35, 7, 7, 358+i*38, 176) * 10 ** (5 - i)
     end
-    score.to_i
+    score
   end
 
   def get_bad(file, version)
-    bad = ''
+    bad = 0
     materials = Material.where(style: :bad, version: version).pluck(:pixels, :number)
     0.upto(3) do |i|
-      bad += get_number(file, materials, 12, 16, 6, 8, 356+i*13, 265).to_s
+      bad += get_number(file, materials, 12, 16, 6, 8, 356+i*13, 265) * 10 ** (3 - i)
     end
-    bad.to_i
+    bad
   end
 
   def get_good(file, version)
-    good = ''
+    good = 0
     materials = Material.where(style: :good, version: version).pluck(:pixels, :number)
     0.upto(3) do |i|
-      good += get_number(file, materials, 12, 16, 6, 8, 356+i*13, 248).to_s
+      good += get_number(file, materials, 12, 16, 6, 8, 356+i*13, 248) * 10 ** (3 - i)
     end
-    good.to_i
+    good
   end
 
   def get_random_option(file, version)

@@ -52,13 +52,9 @@ class ChartsController < ApplicationController
   def show
     @chart = Chart.find(params[:id])
     @results = @chart.results.where(user_id: current_user.id).order(played_at: :asc)
-    @score_graphs = []
-    @bad_graphs = []
-    Result.random_options.each do |option|
-      @score_graphs << { name: t(option[0]), data: @results.where(random_option: option).pluck(:played_at, :score).map { |record| [I18n.l(record[0]), record[1]] } }
-      @bad_graphs << { name: t(option[0]), data: @results.where(random_option: option).pluck(:played_at, :bad).map { |record| [I18n.l(record[0]), record[1]] } }
-    end
-    #スコアグラフの上端と下端を10000の倍数にする
+    @score_graphs = @results.decorate.score_graphs
+    @bad_graphs = @results.decorate.bad_graphs
+    # スコアグラフの上端と下端を10000の倍数にする
     @max_score = @results.maximum(:score)&.ceil(-4)
     @min_score = @results.minimum(:score)&.floor(-4)
   end
