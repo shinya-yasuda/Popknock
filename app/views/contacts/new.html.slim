@@ -1,0 +1,20 @@
+.container
+  = form_with model: @contact, local: true do |f|
+    = render 'shared/error_messages', object: f.object
+    .form-group
+      = f.label :name, 'お名前(25文字まで)'
+      = f.text_field :name, class: 'form-control'
+    .form-group
+      = f.label :email, '返信先メールアドレス'
+      = f.text_field :email, class: 'form-control'
+    .form-group
+      = f.label :category, 'お問い合わせの種類'
+      = f.select :category, [['設定ミス、不具合等の報告', 'report_error'], ['サイトに関する質問', 'question'], ['サイトへの要望', 'request'], ['その他', 'other']], {include_blank: '選択してください'}
+    .form-group
+      = f.check_box :no_reply
+      = f.label :no_reply, '返信不要'
+    .form-group
+      = f.label :message, 'お問い合わせ内容'
+      = f.text_area :message, class: 'form-control'
+    .form-group
+      = f.submit '送信', class: 'btn btn-primary'

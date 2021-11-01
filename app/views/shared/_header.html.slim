@@ -12,3 +12,5 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           = link_to( 'リザルト投稿', new_result_path, { class: 'nav-link' })
         li.nav-item
           = link_to( 'ログアウト', :logout, { method: :post, class: 'nav-link', data: { confirm: 'ログアウトしますか？' } })
+        li.nav-item
+          = link_to( 'お問い合わせ', new_contacts_path, { class: 'nav-link' })

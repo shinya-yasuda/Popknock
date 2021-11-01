@@ -9,10 +9,6 @@ class ChartsController < ApplicationController
                end
   end
 
-  def ran_levels; end
-
-  def s_ran_levels; end
-
   def index
     @level = params[:level]
     @option = params[:option]
@@ -35,18 +31,6 @@ class ChartsController < ApplicationController
     else
       @charts = Chart.where(level: @level).joins(:music).order(genre: :asc)
     end
-  end
-
-  def ran_index
-    @level = params[:level] || params[:r][:level]
-    @charts = Chart.where(ran_level: @level).joins(:music).merge(Music.where.not(pixels: nil))
-    @results = current_user.results.where(random_option: :random)
-  end
-
-  def s_ran_index
-    @level = params[:level] || params[:r][:level]
-    @charts = Chart.where(s_ran_level: @level).joins(:music).merge(Music.where.not(pixels: nil))
-    @results = current_user.results.where(random_option: :s-random)
   end
 
   def show

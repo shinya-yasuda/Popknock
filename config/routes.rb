@@ -2,13 +2,10 @@ Rails.application.routes.draw do
   get 'oauths/oauth'
   get 'oauths/callback'
   root to: 'static_pages#home'
+  resource :contacts
   resources :charts do
     collection do
       get :levels
-      get :ran_levels
-      get :s_ran_levels
-      get :ran_index
-      get :s_ran_index
     end
     member do
       get :detail

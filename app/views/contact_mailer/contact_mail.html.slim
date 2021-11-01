@@ -1,0 +1,9 @@
+h3 お問い合わせ内容
+br
+= "#{@contact.name}より"
+br
+= "カテゴリー: #{t(@contact.category)}"
+br
+= "内容: #{@contact.message}"
+
+= "返信先: #{@contact.email}"

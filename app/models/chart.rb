@@ -6,13 +6,6 @@ class Chart < ApplicationRecord
   validates :s_ran_level, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
   validates :difficulty, uniqueness: { scope: :music_id, message: 'この難易度の譜面はすでに存在します' }
   enum difficulty: { easy: 0, N: 1, H: 2, EX: 3 }
-  scope :sort_by_best_medal_asc, -> { eager_load(:results).where(results: { medal: Result.group(:chart_id).select('max(medal)'), user_id: User.current_user.id }).order('results.medal': :asc) }
-  scope :sort_by_best_medal_desc, -> { eager_load(:results).where(results: { medal: Result.group(:chart_id).select('max(medal)'), user_id: User.current_user.id }).order('results.medal': :desc) }
-  scope :sort_by_best_score_asc, -> { eager_load(:results).where(results: { score: Result.group(:chart_id).select('max(score)'), user_id: User.current_user.id }).order('results.score': :asc) }
-  scope :sort_by_best_score_desc, -> { eager_load(:results).where(results: { score: Result.group(:chart_id).select('max(score)'), user_id: User.current_user.id }).order('results.score': :desc) }
-  scope :sort_by_least_bad_asc, -> { eager_load(:results).where(results: { bad: Result.group(:chart_id).select('min(bad)'), user_id: User.current_user.id }).order('results.bad': :asc) }
-  scope :sort_by_least_bad_desc, -> { eager_load(:results).where(results: { bad: Result.group(:chart_id).select('min(bad)'), user_id: User.current_user.id }).order('results.bad': :desc) }
-
   class << self
     include ImageProcess
     def search_by_image(file)

@@ -21,6 +21,10 @@ ja:
   14_html: <div style="color:#AEB3B5">◆</div>
   15_html: <div style="color:#AEB3B5">★</div>
   16_html: <div style="color:#F4EF41">★</div>
+  report_error: '設定ミス、不具合等の報告'
+  question: 'サイトに関する質問'
+  request: 'サイトへの要望'
+  other: 'その他'
   date:
     formats:
       default: '%Y/%m/%d'
