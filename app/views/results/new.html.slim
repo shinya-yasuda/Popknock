@@ -6,7 +6,7 @@
   = form_with model: @result, local: true do |f|
     = render 'shared/error_messages', object: f.object
     .form-group
-      = f.file_field :image, class: 'form-control', accept: '.jpg'
+      = f.file_field :images, multiple: true, class: 'form-control', accept: '.jpg'
     .form-group
       = f.hidden_field :version, class: 'form-control', value: 26
     .form-group

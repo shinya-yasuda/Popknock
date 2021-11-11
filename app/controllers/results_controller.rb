@@ -6,23 +6,40 @@ class ResultsController < ApplicationController
   end
 
   def create
-    unless check_image
-      redirect_to new_result_path, danger: 'プレーシェア画像を投稿してください'
-      return
-    end
     @result = Result.new
-    chart = Chart.search_by_image(result_params[:image])
-    if chart && @result.get_version(result_params[:image])
-      @result = current_user.results.new(chart_id: chart.id)
-      @result.analyze_image(result_params[:image])
-      if @result.save
-        redirect_to new_result_path, success: "LV#{@result.chart.level} #{@result.chart.music.name}(#{chart.difficulty})のリザルトを投稿しました"
-      else
-        flash.now[:danger] = 'リザルトの読み取り中にエラーが発生しました'
-        render :new
+    if result_params[:images]
+      successes = []
+      duplicates = []
+      disorders = []
+      i = 0
+      result_params[:images].each do |img|
+        i += 1
+        unless check_image(img)
+          disorders << i
+          next
+        end
+        chart = Chart.search_by_image(img)
+        if chart && @result.get_version(img)
+          @result = current_user.results.new(chart_id: chart.id)
+          @result.analyze_image(img)
+          if @result.save
+            successes << i
+          elsif @result.errors.details[:played_at]
+            duplicates << i
+          else
+            disorders << i
+          end
+        else
+          disorders << i
+        end
       end
+      message = duplicates.present? ? "#{duplicates.join(',')}枚目のリザルトは投稿済です " : ''
+      message += "#{disorders.join(',')}枚目の画像読み取りに失敗しました" if disorders.present?
+      flash[:success] = "#{successes.count}枚のリザルトを保存しました" if successes.present?
+      flash[:danger] = message if message.present?
+      redirect_to new_result_path
     else
-      flash.now[:danger] = 'この画像には対応していません'
+      flash.now[:danger] = 'プレーシェア画像を選択してください'
       render :new
     end
   end
@@ -37,13 +54,11 @@ class ResultsController < ApplicationController
   private
 
   def result_params
-    params.require(:result).permit(:image, :version)
+    params.require(:result).permit(:version, images: [])
   end
 
-  def check_image
-    return false unless result_params[:image]
-
-    image = load_image(result_params[:image])
-    image.width == 600 && image.height == 400
+  def check_image(image)
+    img = load_image(image)
+    img.width == 600 && img.height == 400
   end
 end
